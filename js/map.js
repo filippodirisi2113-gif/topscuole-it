@@ -80,7 +80,7 @@
     } catch (e) { return null; }
   }
 
-  /* ---- Card scuola (layout lista orizzontale) ---- */
+  /* ---- Card scuola (top: badge+nome | bottom: rating + bottoni) ---- */
   function renderCard(school) {
     var score = school.score !== null ? school.score : getSchoolScore(school.id);
     var revCount = school.recensioni || getReviewCount(school.id);
@@ -89,28 +89,34 @@
       return '<span style="color:' + (i <= Math.round(score) ? '#F4C430' : '#dee2e6') + '">★</span>';
     }).join('') : '';
 
-    var scoreHtml = hasScore
-      ? '<div class="score-num">' + score + '</div>'
-      + '<div class="score-stars-sm">' + stars + '</div>'
-      + '<div class="score-label-sm">' + revCount + ' rec.</div>'
-      : '<div style="font-size:.68rem;color:var(--gray-400);text-align:center;line-height:1.3;">Nessuna<br>recens.</div>';
+    var ratingHtml = hasScore
+      ? '<span class="card-score-inline">' + score + '</span>'
+      + '<span class="card-stars-inline">' + stars + '</span>'
+      + '<span class="card-revcount-inline">' + revCount + (revCount === 1 ? ' recensione' : ' recensioni') + '</span>'
+      : '<span class="card-revcount-inline">Nessuna recensione</span>';
 
     return '<a href="school-detail.html?id=' + encodeURIComponent(school.id) + '" class="school-card">'
+      /* riga top: badge + info */
+      + '<div class="school-card__top">'
       + '<div class="school-initials">' + escHtml(school.initials || 'SC') + '</div>'
       + '<div class="school-card__info">'
       + '<div class="school-card__name" title="' + escHtml(school.nome) + '">' + escHtml(school.nome) + '</div>'
       + '<div class="school-card__meta">'
       + '<span class="school-card__type-badge">' + escHtml(school.tipo) + '</span>'
-      + '<span class="school-card__location"><i class="fas fa-map-marker-alt"></i>'
+      + '<span class="school-card__location"><i class="fas fa-map-marker-alt"></i> '
       + escHtml(school.comune) + ' (' + escHtml(school.provincia) + ')'
       + (school.regione ? ' &mdash; ' + escHtml(school.regione) : '') + '</span>'
       + '</div>'
       + '</div>'
-      + '<div class="school-card__score">' + scoreHtml + '</div>'
+      + '</div>'
+      /* riga bottom: rating + dettagli + mappa */
+      + '<div class="school-card__bottom">'
+      + '<div class="school-card__rating">' + ratingHtml + '</div>'
       + '<div class="school-card__actions">'
       + '<span class="btn-detail"><i class="fas fa-info-circle"></i> Dettagli</span>'
       + '<a href="' + googleMapsUrl(school) + '" target="_blank" rel="noopener" class="btn-maps" onclick="event.stopPropagation()">'
       + '<i class="fas fa-map-marker-alt"></i> Mappa</a>'
+      + '</div>'
       + '</div>'
       + '</a>';
   }
