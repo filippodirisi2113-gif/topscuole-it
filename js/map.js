@@ -203,10 +203,10 @@
     var countEl = document.getElementById('resultsCount');
     if (countEl) {
       var total = SCHOOLS_DATA.length.toLocaleString('it');
-      countEl.textContent = filtered.length.toLocaleString('it') + ' scuol'
-        + (filtered.length === 1 ? 'a' : 'e') + ' troват'
-        + (filtered.length === 1 ? 'a' : 'e')
-        + (filtered.length < SCHOOLS_DATA.length ? ' su ' + total : '');
+      var n = filtered.length;
+      countEl.textContent = n.toLocaleString('it')
+        + (n === 1 ? ' scuola trovata' : ' scuole trovate')
+        + (n < SCHOOLS_DATA.length ? ' su ' + total : '');
     }
 
     if (!filtered.length) {

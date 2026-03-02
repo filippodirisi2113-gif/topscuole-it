@@ -94,8 +94,15 @@
         /* Grid of cards */
         .schools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.25rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .schools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         /* School card */
