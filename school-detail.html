@@ -878,7 +878,7 @@
                 if (!score) return '';
                 var s = size || '1rem';
                 return [1, 2, 3, 4, 5].map(function (i) {
-                    return '<span style="font-size:' + s + ';color:' + (i <= Math.round(score) ? '#F4C430' : 'rgba(255,255,255,.25)' + ')">★</span>';
+                    return '<span style="font-size:' + s + ';color:' + (i <= Math.round(score) ? '#F4C430' : 'rgba(255,255,255,.25)') + '">★</span>';
                 }).join('');
             }
 
