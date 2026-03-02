@@ -1,0 +1,19 @@
+# Files and directories to ignore in version control
+# Do NOT commit these to a public repository
+
+# Firebase credentials
+.env
+firebase-config-real.js
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/settings.json
+.idea/
+
+# Logs
+*.log
+npm-debug.log*

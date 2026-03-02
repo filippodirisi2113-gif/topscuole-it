@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cerca Scuole Superiori Italiane — Trova e Confronta | TopScuole.it</title>
+    <meta name="description"
+        content="Cerca e confronta le scuole superiori in tutta Italia. Oltre 4.000 istituti con recensioni degli studenti, voti per didattica, struttura e ambiente. Dati MIUR 2025/26." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.topscuole.it/schools.html" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/animations.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        body {
+            padding-top: 70px;
+            background: var(--gray-100);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: .85rem;
+            position: sticky;
+            top: 70px;
+            z-index: 900;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+        }
+
+        .search-bar__input-wrap {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            background: var(--gray-100);
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-full);
+            padding: .5rem 1rem;
+            flex: 1;
+            min-width: 240px;
+            transition: var(--transition);
+        }
+
+        .search-bar__input-wrap:focus-within {
+            border-color: var(--gold);
+            background: var(--white);
+        }
+
+        .search-bar__input-wrap input {
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: .95rem;
+            color: var(--navy);
+            width: 100%;
+        }
+
+        .filter-select {
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-full);
+            padding: .5rem 1rem;
+            font-size: .88rem;
+            color: var(--navy);
+            background: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .filter-select:focus {
+            border-color: var(--gold);
+        }
+
+        .results-count {
+            font-size: .85rem;
+            color: var(--gray-600);
+            margin-left: auto;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
+        /* Results layout — full width, no map */
+        .results-layout {
+            max-width: 1100px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Grid of cards */
+        .schools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        /* School card */
+        .school-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-sm);
+            border: 2px solid transparent;
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: .85rem;
+        }
+
+        .school-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(244, 196, 48, .18);
+        }
+
+        .school-card__top {
+            display: flex;
+            align-items: flex-start;
+            gap: .85rem;
+        }
+
+        .school-initials {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+            color: var(--gold);
+            font-weight: 800;
+            font-size: .9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            letter-spacing: 1px;
+        }
+
+        .school-card__info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .school-card__name {
+            font-weight: 700;
+            font-size: .95rem;
+            color: var(--navy);
+            margin-bottom: .2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .school-card__type {
+            font-size: .78rem;
+            color: var(--gray-600);
+            margin-bottom: .25rem;
+        }
+
+        .school-card__location {
+            font-size: .78rem;
+            color: var(--gray-400);
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+        }
+
+        .school-card__score {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .score-num {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--navy);
+            line-height: 1;
+        }
+
+        .score-stars-sm {
+            font-size: .65rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+        }
+
+        .school-card__actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--gray-100);
+            padding-top: .75rem;
+            gap: .5rem;
+        }
+
+        .btn-detail {
+            background: var(--navy);
+            color: var(--white);
+            padding: .45rem 1rem;
+            border-radius: 999px;
+            font-size: .8rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+        }
+
+        .btn-detail:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .btn-maps {
+            background: transparent;
+            color: var(--navy-mid);
+            padding: .45rem .85rem;
+            border-radius: 999px;
+            font-size: .78rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1.5px solid var(--gray-200);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+        }
+
+        .btn-maps:hover {
+            border-color: var(--gold);
+            color: var(--gold-dark);
+            background: rgba(244, 196, 48, .05);
+        }
+
+        .school-card__reviews-count {
+            font-size: .72rem;
+            color: var(--gray-400);
+            display: flex;
+            align-items: center;
+            gap: .25rem;
+        }
+
+        /* MIUR badge */
+        .miur-badge {
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            padding: .4rem 2rem;
+            font-size: .75rem;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 130px;
+            z-index: 899;
+        }
+
+        .miur-badge a {
+            color: #1A3A5C;
+            font-weight: 600;
+        }
+
+        .miur-badge i {
+            color: #F4C430;
+        }
+
+        /* Fuzzy suggestion banner */
+        #suggestionBanner {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Load more */
+        #loadMoreBtn {
+            display: block;
+            width: 100%;
+            padding: .85rem;
+            background: var(--navy);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: .9rem;
+            cursor: pointer;
+            margin-top: 1.25rem;
+            font-family: Inter, sans-serif;
+            transition: var(--transition);
+        }
+
+        #loadMoreBtn:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        /* Auth CSS */
+        #authModal {
+            position: fixed;
+            inset: 0;
+            background: rgba(13, 27, 42, .75);
+            backdrop-filter: blur(6px);
+            z-index: 9000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity .3s ease
+        }
+
+        #authModal.open {
+            opacity: 1;
+            display: flex
+        }
+
+        .auth-box {
+            background: #fff;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 420px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .4);
+            transform: translateY(20px);
+            transition: transform .3s ease
+        }
+
+        #authModal.open .auth-box {
+            transform: translateY(0)
+        }
+
+        .auth-header {
+            background: linear-gradient(135deg, #0D1B2A, #1A3A5C);
+            padding: 2rem;
+            text-align: center;
+            position: relative
+        }
+
+        .auth-header h2 {
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: .25rem
+        }
+
+        .auth-header p {
+            color: rgba(255, 255, 255, .55);
+            font-size: .85rem
+        }
+
+        .auth-tabs {
+            display: flex;
+            border-bottom: 2px solid #f0f0f0;
+            background: #fafafa
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: .85rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: .9rem;
+            color: #6C757D;
+            cursor: pointer;
+            transition: .2s;
+            border: none;
+            background: none
+        }
+
+        .auth-tab.active {
+            color: #0D1B2A;
+            border-bottom: 2px solid #F4C430;
+            margin-bottom: -2px
+        }
+
+        .auth-body {
+            padding: 1.75rem
+        }
+
+        .auth-field {
+            margin-bottom: 1rem
+        }
+
+        .auth-field label {
+            display: block;
+            font-size: .83rem;
+            font-weight: 600;
+            color: #1A3A5C;
+            margin-bottom: .35rem
+        }
+
+        .auth-field input {
+            width: 100%;
+            padding: .7rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: .95rem;
+            outline: none;
+            transition: border-color .2s;
+            font-family: Inter, sans-serif;
+            box-sizing: border-box
+        }
+
+        .auth-field input:focus {
+            border-color: #F4C430
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: .85rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: .95rem;
+            cursor: pointer;
+            border: none;
+            transition: all .2s;
+            font-family: Inter, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem
+        }
+
+        .auth-btn-primary {
+            background: #0D1B2A;
+            color: #fff;
+            margin-bottom: .75rem
+        }
+
+        .auth-btn-primary:hover {
+            background: #1A3A5C
+        }
+
+        .auth-btn-google {
+            background: #fff;
+            color: #444;
+            border: 2px solid #e9ecef
+        }
+
+        .auth-btn-google:hover {
+            border-color: #F4C430;
+            background: #fffef5
+        }
+
+        .auth-divider {
+            text-align: center;
+            color: #adb5bd;
+            font-size: .8rem;
+            margin: .75rem 0;
+            position: relative
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 42%;
+            height: 1px;
+            background: #e9ecef
+        }
+
+        .auth-divider::before {
+            left: 0
+        }
+
+        .auth-divider::after {
+            right: 0
+        }
+
+        #authError {
+            display: none;
+            background: rgba(220, 53, 69, .08);
+            border: 1px solid rgba(220, 53, 69, .25);
+            color: #b02a37;
+            padding: .65rem 1rem;
+            border-radius: 8px;
+            font-size: .83rem;
+            margin-bottom: .75rem
+        }
+
+        .auth-close {
+            position: absolute;
+            top: .75rem;
+            right: .75rem;
+            background: rgba(255, 255, 255, .15);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .2s
+        }
+
+        .auth-switch {
+            text-align: center;
+            font-size: .83rem;
+            color: #6c757d;
+            margin-top: .75rem
+        }
+
+        .auth-switch a {
+            color: #0D1B2A;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: underline
+        }
+
+        .nav-user {
+            display: none;
+            align-items: center;
+            gap: .5rem;
+            position: relative;
+            cursor: pointer
+        }
+
+        .nav-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #F4C430, #D4A017);
+            color: #0D1B2A;
+            font-weight: 800;
+            font-size: .85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(244, 196, 48, .4)
+        }
+
+        .nav-username {
+            font-size: .88rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, .9)
+        }
+
+        .nav-dropdown {
+            position: absolute;
+            top: calc(100% + .75rem);
+            right: 0;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, .2);
+            padding: .5rem;
+            min-width: 180px;
+            display: none;
+            z-index: 100
+        }
+
+        .nav-dropdown a,
+        .nav-dropdown button {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .6rem .85rem;
+            border-radius: 8px;
+            font-size: .87rem;
+            color: #212529;
+            width: 100%;
+            text-align: left;
+            transition: .15s;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: Inter, sans-serif
+        }
+
+        .nav-dropdown a:hover,
+        .nav-dropdown button:hover {
+            background: #f8f9fa
+        }
+
+        .nav-dropdown .logout-btn {
+            color: #dc3545
+        }
+
+        @media (max-width:768px) {
+            .schools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar__logo">
+            <img src="assets/logo.png" alt="TopScuole.it logo" />
+            <span class="navbar__brand">Top<span>Scuole</span>.it</span>
+        </div>
+        <ul class="navbar__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="schools.html" style="color:var(--gold);">Cerca Scuole</a></li>
+            <li><a href="#">Classifiche</a></li>
+            <li>
+                <button id="navLoginBtn" class="navbar__cta" onclick="openAuthModal('login')"
+                    style="display:flex;align-items:center;gap:.4rem;">
+                    <i class="fas fa-user"></i> Accedi
+                </button>
+            </li>
+            <li>
+                <div class="nav-user" id="navUserWidget" onclick="toggleUserDropdown()">
+                    <div class="nav-avatar" id="navUserAvatar"></div>
+                    <span class="nav-username" id="navUserName"></span>
+                    <i class="fas fa-chevron-down" style="font-size:.65rem;color:rgba(255,255,255,.5)"></i>
+                    <div class="nav-dropdown" id="userDropdown">
+                        <a href="#"><i class="fas fa-user-circle"></i> Il mio profilo</a>
+                        <a href="#"><i class="fas fa-star"></i> Le mie recensioni</a>
+                        <hr style="border:none;border-top:1px solid #e9ecef;margin:.3rem 0" />
+                        <button class="logout-btn" onclick="handleSignOut()"><i class="fas fa-sign-out-alt"></i>
+                            Esci</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- MIUR Badge -->
+    <div class="miur-badge" id="miurBadge">
+        <i class="fas fa-database"></i>
+        <a href="https://dati.istruzione.it/opendata/opendata/catalogo/elements1/?area=Scuole" target="_blank"
+            rel="noopener">MIUR Open Data</a>
+        &mdash; Caricamento...
+    </div>
+
+    <!-- SEARCH BAR -->
+    <div class="search-bar">
+        <div class="search-bar__input-wrap" style="min-width:260px;">
+            <i class="fas fa-search" style="color:var(--gray-400);"></i>
+            <input type="text" id="searchInput" placeholder="Cerca scuola, città, CAP, codice MIUR..."
+                autocomplete="off" />
+        </div>
+        <select class="filter-select" id="typeFilter" onchange="filterSchools()">
+            <option value="">Tutti i tipi</option>
+            <option value="Liceo Classico">Liceo Classico</option>
+            <option value="Liceo Scientifico">Liceo Scientifico</option>
+            <option value="Liceo Artistico">Liceo Artistico</option>
+            <option value="Liceo Linguistico">Liceo Linguistico</option>
+            <option value="Liceo">Tutti i Licei</option>
+            <option value="ITIS">ITIS</option>
+            <option value="ITC">ITC</option>
+            <option value="Istituto Tecnico">Istituti Tecnici</option>
+            <option value="Istituto Professionale">Istituti Professionali</option>
+            <option value="IIS">IIS</option>
+        </select>
+        <select class="filter-select" id="regionFilter" onchange="filterSchools()">
+            <option value="">Tutte le regioni</option>
+        </select>
+        <select class="filter-select" id="ratingFilter" onchange="filterSchools()">
+            <option value="0">Tutti i voti</option>
+            <option value="4">★ 4+ stelle</option>
+            <option value="4.5">★★ 4.5+ stelle</option>
+        </select>
+        <span class="results-count" id="resultsCount">Caricamento...</span>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results-layout">
+        <div id="suggestionBanner"></div>
+        <div class="schools-grid" id="schoolsGrid">
+            <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--gray-400);">
+                <i class="fas fa-spinner fa-spin" style="font-size:2rem;margin-bottom:1rem;display:block;"></i>
+                <strong>Caricamento 4.000+ scuole MIUR...</strong>
+            </div>
+        </div>
+        <button id="loadMoreBtn" style="display:none;" onclick="loadMoreSchools()"></button>
+    </div>
+
+    <!-- Dataset MIUR 2025/26 — 4.026 scuole superiori italiane -->
+    <script src="data/schools-data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/reviews-db.js"></script>
+    <script src="js/map.js"></script>
+    <script type="module" src="js/auth.js"></script>
+
+    <!-- AUTH MODAL -->
+    <div id="authModal" role="dialog" aria-modal="true">
+        <div class="auth-box">
+            <div class="auth-header">
+                <button class="auth-close" onclick="closeAuthModal()">&times;</button>
+                <h2>TopScuole.it</h2>
+                <p>Accedi per recensire le scuole</p>
+            </div>
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Accedi</button>
+                <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Registrati</button>
+            </div>
+            <div class="auth-body">
+                <div id="authError"></div>
+                <div id="loginPane">
+                    <button class="auth-btn auth-btn-google" id="btnLoginGoogle" onclick="signInWithGoogle()">
+                        <img src="https://www.google.com/favicon.ico" width="16" alt="G" /> Accedi con Google
+                    </button>
+                    <div class="auth-divider">oppure con email</div>
+                    <div class="auth-field"><label>Email</label><input type="email" id="authEmail"
+                            placeholder="nome@esempio.it" autocomplete="email" /></div>
+                    <div class="auth-field"><label>Password</label><input type="password" id="authPassword"
+                            placeholder="Min. 8 caratteri" autocomplete="current-password"
+                            onkeypress="if(event.key==='Enter')signInWithEmail()" /></div>
+                    <button class="auth-btn auth-btn-primary" id="btnLoginEmail" onclick="signInWithEmail()"><i
+                            class="fas fa-sign-in-alt"></i> Accedi</button>
+                    <div class="auth-switch">Non hai un account? <a onclick="switchAuthTab('register')">Registrati
+                            gratis</a></div>
+                </div>
+                <div id="registerPane" style="display:none">
+                    <button class="auth-btn auth-btn-google" onclick="signInWithGoogle()"><img
+                            src="https://www.google.com/favicon.ico" width="16" alt="G" /> Registrati con
+                        Google</button>
+                    <div class="auth-divider">oppure con email</div>
+                    <div class="auth-field"><label>Nome e Cognome</label><input type="text" id="regName"
+                            placeholder="Mario Rossi" autocomplete="name" /></div>
+                    <div class="auth-field"><label>Email</label><input type="email" id="regEmail"
+                            placeholder="nome@esempio.it" autocomplete="email" /></div>
+                    <div class="auth-field"><label>Password</label><input type="password" id="regPassword"
+                            placeholder="Min. 8 caratteri" autocomplete="new-password" /></div>
+                    <div class="auth-field"><label>Conferma Password</label><input type="password" id="regConfirm"
+                            placeholder="Ripeti la password" autocomplete="new-password"
+                            onkeypress="if(event.key==='Enter')registerWithEmail()" /></div>
+                    <button class="auth-btn auth-btn-primary" id="btnRegister" onclick="registerWithEmail()"><i
+                            class="fas fa-user-plus"></i> Crea Account Gratuito</button>
+                    <div class="auth-switch">Hai già un account? <a onclick="switchAuthTab('login')">Accedi</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

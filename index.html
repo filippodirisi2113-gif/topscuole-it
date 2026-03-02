@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Primary -->
+  <title>TopScuole.it | Recensioni Scuole Superiori in Italia — Trova il Miglior Istituto</title>
+  <meta name="description"
+    content="Trova e valuta le migliori scuole superiori in Italia. Leggi recensioni reali di studenti e genitori su didattica, strutture e ambiente. Orientamento scolastico gratuito per licei, istituti tecnici e professionali." />
+  <meta name="keywords"
+    content="recensioni scuole superiori, migliori licei Italia, valutazione istituti scolastici, orientamento scolastico, confronta scuole, recensioni liceo, istituto tecnico recensioni, scuole Milano, scuole Roma" />
+  <link rel="canonical" href="https://www.topscuole.it/" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="TopScuole.it" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.topscuole.it/" />
+  <meta property="og:title" content="TopScuole.it — Il TripAdvisor delle Scuole Italiane" />
+  <meta property="og:description"
+    content="Oltre 8.000 scuole recensite da studenti e genitori. Trova il miglior istituto nella tua città con valutazioni su didattica, strutture, ambiente e organizzazione." />
+  <meta property="og:image" content="https://www.topscuole.it/assets/og-image.png" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:site_name" content="TopScuole.it" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TopScuole.it — Recensioni Scuole Superiori in Italia" />
+  <meta name="twitter:description"
+    content="Trova la scuola migliore nella tua città. Recensioni reali, mappa interattiva e confronto tra istituti." />
+  <meta name="twitter:image" content="https://www.topscuole.it/assets/og-image.png" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "TopScuole.it",
+    "url": "https://www.topscuole.it",
+    "description": "Portale di valutazione e orientamento scolastico in Italia. Recensioni di studenti e genitori su oltre 8.000 scuole.",
+    "inLanguage": "it-IT",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://www.topscuole.it/schools.html?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "TopScuole.it",
+      "url": "https://www.topscuole.it",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.topscuole.it/assets/logo.png"
+      }
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/animations.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* --- Auth Modal --- */
+    #authModal {
+      position: fixed;
+      inset: 0;
+      background: rgba(13, 27, 42, .75);
+      backdrop-filter: blur(6px);
+      z-index: 9000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity .3s ease
+    }
+
+    #authModal.open {
+      opacity: 1
+    }
+
+    .auth-box {
+      background: #fff;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 420px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .4);
+      transform: translateY(20px);
+      transition: transform .3s ease
+    }
+
+    #authModal.open .auth-box {
+      transform: translateY(0)
+    }
+
+    .auth-header {
+      background: linear-gradient(135deg, #0D1B2A, #1A3A5C);
+      padding: 2rem;
+      text-align: center
+    }
+
+    .auth-header h2 {
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: .25rem
+    }
+
+    .auth-header p {
+      color: rgba(255, 255, 255, .55);
+      font-size: .85rem
+    }
+
+    .auth-tabs {
+      display: flex;
+      border-bottom: 2px solid #f0f0f0;
+      background: #fafafa
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: .85rem;
+      text-align: center;
+      font-weight: 700;
+      font-size: .9rem;
+      color: #6C757D;
+      cursor: pointer;
+      transition: .2s;
+      border: none;
+      background: none
+    }
+
+    .auth-tab.active {
+      color: #0D1B2A;
+      border-bottom: 2px solid #F4C430;
+      margin-bottom: -2px
+    }
+
+    .auth-body {
+      padding: 1.75rem
+    }
+
+    .auth-field {
+      margin-bottom: 1rem
+    }
+
+    .auth-field label {
+      display: block;
+      font-size: .83rem;
+      font-weight: 600;
+      color: #1A3A5C;
+      margin-bottom: .35rem
+    }
+
+    .auth-field input {
+      width: 100%;
+      padding: .7rem 1rem;
+      border: 2px solid #e9ecef;
+      border-radius: 10px;
+      font-size: .95rem;
+      outline: none;
+      transition: border-color .2s;
+      font-family: Inter, sans-serif
+    }
+
+    .auth-field input:focus {
+      border-color: #F4C430
+    }
+
+    .auth-btn {
+      width: 100%;
+      padding: .85rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: pointer;
+      border: none;
+      transition: all .2s;
+      font-family: Inter, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem
+    }
+
+    .auth-btn-primary {
+      background: #0D1B2A;
+      color: #fff;
+      margin-bottom: .75rem
+    }
+
+    .auth-btn-primary:hover {
+      background: #1A3A5C
+    }
+
+    .auth-btn-google {
+      background: #fff;
+      color: #444;
+      border: 2px solid #e9ecef
+    }
+
+    .auth-btn-google:hover {
+      border-color: #F4C430;
+      background: #fffef5
+    }
+
+    .auth-divider {
+      text-align: center;
+      color: #adb5bd;
+      font-size: .8rem;
+      margin: .75rem 0;
+      position: relative
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 42%;
+      height: 1px;
+      background: #e9ecef
+    }
+
+    .auth-divider::before {
+      left: 0
+    }
+
+    .auth-divider::after {
+      right: 0
+    }
+
+    #authError {
+      display: none;
+      background: rgba(220, 53, 69, .08);
+      border: 1px solid rgba(220, 53, 69, .25);
+      color: #b02a37;
+      padding: .65rem 1rem;
+      border-radius: 8px;
+      font-size: .83rem;
+      margin-bottom: .75rem
+    }
+
+    .auth-close {
+      position: absolute;
+      top: .75rem;
+      right: .75rem;
+      background: rgba(255, 255, 255, .15);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: .2s
+    }
+
+    .auth-close:hover {
+      background: rgba(255, 255, 255, .3)
+    }
+
+    .auth-header {
+      position: relative
+    }
+
+    .auth-switch {
+      text-align: center;
+      font-size: .83rem;
+      color: #6c757d;
+      margin-top: .75rem
+    }
+
+    .auth-switch a {
+      color: #0D1B2A;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: underline
+    }
+
+    /* --- Navbar User Widget --- */
+    .nav-user {
+      display: none;
+      align-items: center;
+      gap: .5rem;
+      position: relative;
+      cursor: pointer
+    }
+
+    .nav-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #F4C430, #D4A017);
+      color: #0D1B2A;
+      font-weight: 800;
+      font-size: .85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid rgba(244, 196, 48, .4)
+    }
+
+    .nav-username {
+      font-size: .88rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .9)
+    }
+
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + .75rem);
+      right: 0;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .2);
+      padding: .5rem;
+      min-width: 180px;
+      display: none;
+      z-index: 100
+    }
+
+    .nav-dropdown a,
+    .nav-dropdown button {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .6rem .85rem;
+      border-radius: 8px;
+      font-size: .87rem;
+      color: #212529;
+      width: 100%;
+      text-align: left;
+      transition: .15s;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: Inter, sans-serif
+    }
+
+    .nav-dropdown a:hover,
+    .nav-dropdown button:hover {
+      background: #f8f9fa
+    }
+
+    .nav-dropdown .logout-btn {
+      color: #dc3545
+    }
+
+    /* --- MIUR Banner --- */
+    .miur-banner {
+      background: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+      padding: .5rem 2rem;
+      font-size: .78rem;
+      color: #6c757d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      flex-wrap: wrap
+    }
+
+    .miur-banner a {
+      color: #1A3A5C;
+      font-weight: 600
+    }
+
+    .miur-banner i {
+      color: #F4C430
+    }
+  </style>
+  <style>
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0D1B2A 0%, #1A3A5C 45%, #0D2137 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(244, 196, 48, 0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(26, 58, 92, 0.8) 0%, transparent 60%),
+        radial-gradient(ellipse 30% 30% at 80% 70%, rgba(244, 196, 48, 0.05) 0%, transparent 60%);
+    }
+
+    .hero__particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero__particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(244, 196, 48, 0.15);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero__particle:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: -100px;
+      right: -80px;
+      animation-delay: 0s;
+      opacity: 0.3;
+    }
+
+    .hero__particle:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      bottom: 20%;
+      left: -60px;
+      animation-delay: 1s;
+      opacity: 0.2;
+    }
+
+    .hero__particle:nth-child(3) {
+      width: 150px;
+      height: 150px;
+      top: 40%;
+      right: 10%;
+      animation-delay: 2s;
+      opacity: 0.15;
+    }
+
+    .hero__particle:nth-child(4) {
+      width: 80px;
+      height: 80px;
+      top: 20%;
+      left: 15%;
+      animation-delay: 0.5s;
+      opacity: 0.25;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(244, 196, 48, 0.12);
+      border: 1px solid rgba(244, 196, 48, 0.3);
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero__title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -2px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero__title em {
+      font-style: normal;
+      background: linear-gradient(135deg, #F4C430, #FFD966);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero__subtitle {
+      font-size: 1.15rem;
+      color: rgba(255, 255, 255, 0.65);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* --- Search Box --- */
+    .search-box {
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: var(--radius-lg);
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: 640px;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(244, 196, 48, 0.1);
+    }
+
+    .search-box__icon {
+      color: var(--gold-dark);
+      padding: 0 0.5rem 0 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .search-box__input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      color: var(--navy);
+      background: transparent;
+      padding: 0.75rem 0;
+    }
+
+    .search-box__input::placeholder {
+      color: var(--gray-400);
+    }
+
+    .search-box__btn {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: var(--radius-md);
+      padding: 0.8rem 1.5rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .search-box__btn:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .hero__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    .hero__tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.82rem;
+      padding: 0.3rem 0.85rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .hero__tag:hover {
+      background: rgba(244, 196, 48, 0.15);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* --- Stats bar --- */
+    .stats-bar {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -1px;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 0.5px;
+    }
+
+    /* ---- HOW IT WORKS ---- */
+    .how-it-works {
+      padding: 6rem 2rem;
+      background: var(--white);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .step-card {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-radius: var(--radius-md);
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .step-card:hover {
+      background: var(--white);
+      border-color: var(--gold);
+      box-shadow: 0 8px 32px rgba(244, 196, 48, 0.12);
+      transform: translateY(-4px);
+    }
+
+    .step-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.75rem;
+      box-shadow: 0 8px 24px rgba(13, 27, 42, 0.2);
+    }
+
+    .step-number {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--gold);
+      background: rgba(244, 196, 48, 0.1);
+      border-radius: var(--radius-full);
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+    }
+
+    .step-card p {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      line-height: 1.65;
+    }
+
+    /* ---- TOP SCHOOLS ---- */
+    .top-schools {
+      padding: 6rem 2rem;
+      background: var(--gray-100);
+    }
+
+    .schools-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .school-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .school-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .school-card__header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .school-initials {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      background: rgba(244, 196, 48, 0.15);
+      border: 2px solid rgba(244, 196, 48, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .school-card__score {
+      text-align: right;
+    }
+
+    .school-card__score .score-num {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--white);
+      display: block;
+      line-height: 1;
+    }
+
+    .school-card__score .score-label {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .school-card__body {
+      padding: 1.25rem 1.5rem 1.5rem;
+    }
+
+    .school-card__name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+
+    .school-card__address {
+      font-size: 0.82rem;
+      color: var(--gray-600);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .school-card__cats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .school-card__cats .badge {
+      font-size: 0.7rem;
+    }
+
+    /* ---- CATEGORIES / REVIEW PREVIEW ---- */
+    .review-preview {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      padding: 6rem 2rem;
+      color: var(--white);
+    }
+
+    .review-preview-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .review-preview__left h2 {
+      font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .review-preview__left p {
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .categories-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cat-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: var(--transition);
+    }
+
+    .cat-item:hover {
+      background: rgba(244, 196, 48, 0.08);
+      border-color: rgba(244, 196, 48, 0.2);
+    }
+
+    .cat-icon {
+      font-size: 1.3rem;
+      width: 40px;
+      text-align: center;
+    }
+
+    .cat-info {
+      flex: 1;
+    }
+
+    .cat-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .cat-desc {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .cat-stars {
+      display: flex;
+      gap: 2px;
+    }
+
+    .cat-stars .star {
+      font-size: 0.85rem;
+    }
+
+    /* Review card mockup */
+    .review-mockup {
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      color: var(--gray-900);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    }
+
+    .review-mockup__header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .review-mockup__avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .review-mockup__meta strong {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--navy);
+    }
+
+    .review-mockup__meta small {
+      color: var(--gray-600);
+      font-size: 0.8rem;
+    }
+
+    .review-mockup__overall {
+      margin-bottom: 1.5rem;
+    }
+
+    .overall-score {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .overall-score .num {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--navy);
+    }
+
+    .overall-score .out-of {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+    }
+
+    .review-mockup__text {
+      font-size: 0.88rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--gray-200);
+      font-style: italic;
+    }
+
+    /* ---- CTA BANNER ---- */
+    .cta-banner {
+      background: var(--gold);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .cta-banner h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+      letter-spacing: -1px;
+    }
+
+    .cta-banner p {
+      color: rgba(13, 27, 42, 0.65);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-banner .btn-navy {
+      background: var(--navy);
+      color: var(--white);
+      padding: 0.9rem 2.5rem;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .cta-banner .btn-navy:hover {
+      background: var(--navy-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(13, 27, 42, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+
+      .steps-grid,
+      .schools-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .review-preview-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .steps-grid,
+      .schools-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-bar {
+        gap: 1.5rem;
+      }
+
+      .search-box {
+        flex-direction: column;
+        border-radius: var(--radius-md);
+      }
+
+      .search-box__btn {
+        width: 100%;
+        justify-content: center;
+        border-radius: var(--radius-sm);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__logo">
+      <img src="assets/logo.png" alt="TopScuole.it logo" />
+      <span class="navbar__brand">Top<span>Scuole</span>.it</span>
+    </div>
+    <ul class="navbar__links">
+      <li><a href="schools.html">Cerca Scuole</a></li>
+      <li><a href="#">Classifiche</a></li>
+      <li><a href="#">Come Funziona</a></li>
+
+      <!-- Stato NON loggato -->
+      <li>
+        <button id="navLoginBtn" class="navbar__cta" onclick="openAuthModal('login')"
+          style="display:flex;align-items:center;gap:.4rem;">
+          <i class="fas fa-user"></i> Accedi
+        </button>
+      </li>
+
+      <!-- Stato LOGGATO -->
+      <li>
+        <div class="nav-user" id="navUserWidget" onclick="toggleUserDropdown()">
+          <div class="nav-avatar" id="navUserAvatar"></div>
+          <span class="nav-username" id="navUserName"></span>
+          <i class="fas fa-chevron-down" style="font-size:.65rem;color:rgba(255,255,255,.5)"></i>
+          <div class="nav-dropdown" id="userDropdown">
+            <a href="#"><i class="fas fa-user-circle"></i> Il mio profilo</a>
+            <a href="#"><i class="fas fa-star"></i> Le mie recensioni</a>
+            <hr style="border:none;border-top:1px solid #e9ecef;margin:.3rem 0" />
+            <button class="logout-btn" onclick="handleSignOut()">
+              <i class="fas fa-sign-out-alt"></i> Esci
+            </button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- MIUR Attribution Banner -->
+  <div class="miur-banner" id="miurStaticBanner">
+    <i class="fas fa-database"></i>
+    Dati scolastici ufficiali:
+    <a href="https://dati.istruzione.it/opendata/opendata/catalogo/elements1/?area=Scuole" target="_blank"
+      rel="noopener">Portale Open Data — Ministero dell'Istruzione e del Merito</a>
+    &mdash; Anno scolastico 2024/2025
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero__particles">
+      <div class="hero__particle"></div>
+      <div class="hero__particle"></div>
+      <div class="hero__particle"></div>
+      <div class="hero__particle"></div>
+    </div>
+
+    <div class="hero__content">
+      <div class="hero__eyebrow animate-fade-in-down">
+        <i class="fas fa-star"></i>
+        Il TripAdvisor delle Scuole Italiane
+      </div>
+
+      <h1 class="hero__title animate-fade-in-up delay-1">
+        Trova la <em>Scuola Migliore</em><br />nella tua città
+      </h1>
+
+      <p class="hero__subtitle animate-fade-in-up delay-2">
+        Oltre 8.000 istituti scolastici recensiti da studenti, genitori e docenti.
+        Confronta licei, istituti tecnici e professionali. Scegli con sicurezza.
+      </p>
+
+      <!-- Search -->
+      <div class="search-box animate-scale-in delay-3" id="heroSearch">
+        <i class="fas fa-map-marker-alt search-box__icon"></i>
+        <input type="text" class="search-box__input" id="cityInput" placeholder="Città, CAP o nome scuola..."
+          aria-label="Cerca scuola per città o CAP" />
+        <button class="search-box__btn" onclick="doSearch()" id="searchBtn">
+          <i class="fas fa-search"></i> Cerca
+        </button>
+      </div>
+
+      <div class="hero__tags animate-fade-in delay-4">
+        <span class="hero__tag" onclick="setSearch('Milano')"><i class="fas fa-map-pin"></i> Milano</span>
+        <span class="hero__tag" onclick="setSearch('Roma')"><i class="fas fa-map-pin"></i> Roma</span>
+        <span class="hero__tag" onclick="setSearch('Napoli')"><i class="fas fa-map-pin"></i> Napoli</span>
+        <span class="hero__tag" onclick="setSearch('Torino')"><i class="fas fa-map-pin"></i> Torino</span>
+        <span class="hero__tag" onclick="setSearch('Bologna')"><i class="fas fa-map-pin"></i> Bologna</span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stat-item reveal">
+        <span class="stat-number" data-target="8400">0</span>
+        <span class="stat-label">Scuole Presenti</span>
+      </div>
+      <div class="stat-item reveal delay-1">
+        <span class="stat-number" data-target="42500">0</span>
+        <span class="stat-label">Recensioni Totali</span>
+      </div>
+      <div class="stat-item reveal delay-2">
+        <span class="stat-number" data-target="107">0</span>
+        <span class="stat-label">Province Coperte</span>
+      </div>
+      <div class="stat-item reveal delay-3">
+        <span class="stat-number" data-target="98">0</span>
+        <span class="stat-label" style="white-space:nowrap">% Utenti Soddisfatti</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="come-funziona">
+    <div class="section-header reveal">
+      <span class="eyebrow">Orientamento Scolastico Gratuito</span>
+      <h2>Come trovare la scuola giusta in 3 passi</h2>
+      <p>Confronta le migliori scuole superiori della tua zona con recensioni reali di studenti e genitori</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal delay-1">
+        <div class="step-number">1</div>
+        <div class="step-icon">🔍</div>
+        <h3>Cerca scuole per città o CAP</h3>
+        <p>Inserisci la tua città o il codice postale. Visualizza tutte le scuole superiori su mappa interattiva con
+          colori che indicano il voto medio degli studenti.</p>
+      </div>
+      <div class="step-card reveal delay-2">
+        <div class="step-number">2</div>
+        <div class="step-icon">📊</div>
+        <h3>Confronta licei e istituti</h3>
+        <p>Leggi le recensioni dettagliate su 5 categorie: didattica, strutture, ambiente sociale, organizzazione e
+          servizi. Dati MIUR verificati.</p>
+      </div>
+      <div class="step-card reveal delay-3">
+        <div class="step-number">3</div>
+        <div class="step-icon">⭐</div>
+        <h3>Lascia la tua recensione</h3>
+        <p>Hai frequentato quella scuola? La tua esperienza aiuta migliaia di famiglie italiane a scegliere il percorso
+          scolastico giusto.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOP SCHOOLS PREVIEW -->
+  <section class="top-schools" id="top-scuole">
+    <div class="section-header reveal">
+      <span class="eyebrow">Classifica Aggiornata 2026</span>
+      <h2>Le scuole superiori meglio valutate in Italia</h2>
+      <p>Classifica basata sulle recensioni degli studenti e verificata con i dati ufficiali MIUR degli ultimi 12 mesi
+      </p>
+    </div>
+    <div class="schools-grid">
+
+      <a href="school-detail.html" class="school-card hover-lift reveal delay-1">
+        <div class="school-card__header">
+          <div class="school-initials">LB</div>
+          <div class="school-card__score">
+            <span class="score-num">4.8</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">Liceo Scientifico A. Banfi</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Romagna 12, Milano</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Top Didattica</span>
+            <span class="badge badge-green">✓ 241 Recensioni</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="school-detail.html" class="school-card hover-lift reveal delay-2">
+        <div class="school-card__header">
+          <div class="school-initials">IT</div>
+          <div class="school-card__score">
+            <span class="score-num">4.7</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">ITIS G. Marconi</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Corso Unità d'Italia 4, Torino</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Top Strutture</span>
+            <span class="badge badge-green">✓ 187 Recensioni</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="school-detail.html" class="school-card hover-lift reveal delay-3">
+        <div class="school-card__header">
+          <div class="school-initials">LC</div>
+          <div class="school-card__score">
+            <span class="score-num">4.6</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">Liceo Classico T. Livio</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Prato, Bologna</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Top Comunità</span>
+            <span class="badge badge-green">✓ 164 Recensioni</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div style="text-align:center;margin-top:2.5rem;" class="reveal">
+      <a href="schools.html" class="btn btn-outline" style="background:var(--white);">
+        <i class="fas fa-th-list"></i> Vedi tutte le scuole
+      </a>
+    </div>
+  </section>
+
+  <!-- REVIEW PREVIEW / CATEGORIES -->
+  <section class="review-preview">
+    <div class="review-preview-inner">
+      <div class="review-preview__left reveal slide-left">
+        <div class="section-header" style="text-align:left;margin-bottom:2rem;">
+          <span class="eyebrow">5 Criteri di Valutazione</span>
+          <h2 style="color:var(--white);">Recensioni precise,<br /><em class="gradient-text">non generiche</em></h2>
+          <p>Non un voto unico, ma 5 dimensioni di valutazione per aiutarti a capire davvero cosa aspettarti.</p>
+        </div>
+        <a href="school-detail.html" class="btn btn-primary">
+          <i class="fas fa-pen"></i> Lascia una Recensione
+        </a>
+      </div>
+
+      <div class="reveal delay-3">
+        <div class="categories-list" style="margin-bottom:2rem;">
+          <div class="cat-item">
+            <span class="cat-icon">🎓</span>
+            <div class="cat-info">
+              <div class="cat-name">Didattica e Docenti</div>
+              <div class="cat-desc">Preparazione e disponibilità degli insegnanti</div>
+            </div>
+            <div class="cat-stars">
+              <span class="star filled">★</span><span class="star filled">★</span>
+              <span class="star filled">★</span><span class="star filled">★</span>
+              <span class="star">★</span>
+            </div>
+          </div>
+          <div class="cat-item">
+            <span class="cat-icon">🏫</span>
+            <div class="cat-info">
+              <div class="cat-name">Struttura ed Edificio</div>
+              <div class="cat-desc">Pulizia, laboratori, palestre, bagni</div>
+            </div>
+            <div class="cat-stars">
+              <span class="star filled">★</span><span class="star filled">★</span>
+              <span class="star filled">★</span><span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+          <div class="cat-item">
+            <span class="cat-icon">👥</span>
+            <div class="cat-info">
+              <div class="cat-name">Ambiente Sociale</div>
+              <div class="cat-desc">Inclusività, sicurezza, comunità</div>
+            </div>
+            <div class="cat-stars">
+              <span class="star filled">★</span><span class="star filled">★</span>
+              <span class="star filled">★</span><span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+          </div>
+          <div class="cat-item">
+            <span class="cat-icon">📋</span>
+            <div class="cat-info">
+              <div class="cat-name">Organizzazione</div>
+              <div class="cat-desc">Segreteria, orari, comunicazioni</div>
+            </div>
+            <div class="cat-stars">
+              <span class="star filled">★</span><span class="star filled">★</span>
+              <span class="star filled">★</span><span class="star filled">★</span>
+              <span class="star">★</span>
+            </div>
+          </div>
+          <div class="cat-item">
+            <span class="cat-icon">🚌</span>
+            <div class="cat-info">
+              <div class="cat-name">Servizi e Posizione</div>
+              <div class="cat-desc">Mensa, trasporti pubblici, posizione</div>
+            </div>
+            <div class="cat-stars">
+              <span class="star filled">★</span><span class="star filled">★</span>
+              <span class="star filled">★</span><span class="star filled">★</span>
+              <span class="star filled">★</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review Mockup -->
+        <div class="review-mockup">
+          <div class="review-mockup__header">
+            <div class="review-mockup__avatar">M</div>
+            <div class="review-mockup__meta">
+              <strong>Marco R., ex-alunno</strong>
+              <small>Liceo Banfi, Milano • Febbraio 2026</small>
+            </div>
+            <div style="margin-left:auto;">
+              <span class="badge badge-gold">Verificato ✓</span>
+            </div>
+          </div>
+          <div class="review-mockup__overall">
+            <div class="rating-bar-wrap"><span class="rating-bar-label">Didattica</span>
+              <div class="rating-bar-track">
+                <div class="rating-bar-fill" style="width:92%"></div>
+              </div><span class="rating-bar-value">4.6</span>
+            </div>
+            <div class="rating-bar-wrap"><span class="rating-bar-label">Struttura</span>
+              <div class="rating-bar-track">
+                <div class="rating-bar-fill" style="width:80%"></div>
+              </div><span class="rating-bar-value">4.0</span>
+            </div>
+            <div class="rating-bar-wrap"><span class="rating-bar-label">Ambiente</span>
+              <div class="rating-bar-track">
+                <div class="rating-bar-fill" style="width:96%"></div>
+              </div><span class="rating-bar-value">4.8</span>
+            </div>
+            <div class="rating-bar-wrap"><span class="rating-bar-label">Organizzazione</span>
+              <div class="rating-bar-track">
+                <div class="rating-bar-fill" style="width:76%"></div>
+              </div><span class="rating-bar-value">3.8</span>
+            </div>
+            <div class="rating-bar-wrap"><span class="rating-bar-label">Servizi</span>
+              <div class="rating-bar-track">
+                <div class="rating-bar-fill" style="width:84%"></div>
+              </div><span class="rating-bar-value">4.2</span>
+            </div>
+          </div>
+          <div class="review-mockup__text">
+            "Il livello dei professori è davvero elevato, in particolare in matematica e fisica. L'ambiente è stimolante
+            e inclusivo. La segreteria potrebbe essere più reattiva, ma nel complesso è una scuola che consiglio
+            vivamente."
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="reveal">
+      <h2>Hai frequentato una scuola superiore? Recensiscila ora</h2>
+      <p>La tua recensione aiuta migliaia di studenti italiani a scegliere il liceo o istituto giusto. Ci vogliono solo
+        2 minuti.</p>
+      <a href="school-detail.html" class="btn-navy">
+        <i class="fas fa-star"></i> Lascia la tua Recensione
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand-name">Top<span>Scuole</span>.it</div>
+        <p class="footer__desc">Il portale di valutazione e orientamento scolastico in Italia. Trasparenza e
+          informazione per le famiglie italiane.</p>
+        <div style="display:flex;gap:0.75rem;">
+          <a href="#" style="color:rgba(255,255,255,0.4);font-size:1.2rem;transition:color 0.2s;"
+            onmouseover="this.style.color='#F4C430'" onmouseout="this.style.color='rgba(255,255,255,0.4)'"><i
+              class="fab fa-instagram"></i></a>
+          <a href="#" style="color:rgba(255,255,255,0.4);font-size:1.2rem;transition:color 0.2s;"
+            onmouseover="this.style.color='#F4C430'" onmouseout="this.style.color='rgba(255,255,255,0.4)'"><i
+              class="fab fa-tiktok"></i></a>
+          <a href="#" style="color:rgba(255,255,255,0.4);font-size:1.2rem;transition:color 0.2s;"
+            onmouseover="this.style.color='#F4C430'" onmouseout="this.style.color='rgba(255,255,255,0.4)'"><i
+              class="fab fa-facebook"></i></a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>Scopri</h4>
+        <a href="schools.html">Cerca Scuole</a>
+        <a href="#">Classifiche Nazionali</a>
+        <a href="#">Confronta Scuole</a>
+        <a href="#">Mappa Interattiva</a>
+      </div>
+      <div class="footer__col">
+        <h4>Tipologie</h4>
+        <a href="#">Licei</a>
+        <a href="#">Istituti Tecnici</a>
+        <a href="#">Istituti Professionali</a>
+        <a href="#">Scuole Medie</a>
+      </div>
+      <div class="footer__col">
+        <h4>Informazioni</h4>
+        <a href="#">Chi Siamo</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Termini di Servizio</a>
+        <a href="#">Contatti</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 TopScuole.it — Tutti i diritti riservati</span>
+      <span>P.IVA in fase di registrazione</span>
+    </div>
+    <p class="footer__disclaimer">
+      ⚠️ Le recensioni presenti su questo sito rappresentano opinioni personali degli utenti registrati. TopScuole.it
+      non è responsabile dei contenuti pubblicati dagli utenti. È vietato nominare docenti o studenti con nome e cognome
+      nelle recensioni. Dati scolastici derivati dai dataset aperti MIUR.
+    </p>
+  </footer>
+
+  <!-- AUTH MODAL -->
+  <div id="authModal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+    <div class="auth-box">
+      <div class="auth-header">
+        <button class="auth-close" onclick="closeAuthModal()" aria-label="Chiudi">&times;</button>
+        <h2 id="authModalTitle">TopScuole.it</h2>
+        <p>Accedi per recensire le scuole e fare parte della community</p>
+      </div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Accedi</button>
+        <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Registrati</button>
+      </div>
+      <div class="auth-body">
+        <div id="authError"></div>
+
+        <!-- LOGIN PANE -->
+        <div id="loginPane">
+          <button class="auth-btn auth-btn-google" id="btnLoginGoogle" onclick="signInWithGoogle()">
+            <img src="https://www.google.com/favicon.ico" width="16" alt="Google" /> Accedi con Google
+          </button>
+          <div class="auth-divider">oppure con email</div>
+          <div class="auth-field">
+            <label for="authEmail">Email</label>
+            <input type="email" id="authEmail" placeholder="nome@esempio.it" autocomplete="email" />
+          </div>
+          <div class="auth-field">
+            <label for="authPassword">Password</label>
+            <input type="password" id="authPassword" placeholder="Min. 8 caratteri" autocomplete="current-password"
+              onkeypress="if(event.key==='Enter') signInWithEmail()" />
+          </div>
+          <button class="auth-btn auth-btn-primary" id="btnLoginEmail" onclick="signInWithEmail()">
+            <i class="fas fa-sign-in-alt"></i> Accedi
+          </button>
+          <div class="auth-switch">Non hai un account? <a onclick="switchAuthTab('register')">Registrati gratis</a>
+          </div>
+        </div>
+
+        <!-- REGISTER PANE -->
+        <div id="registerPane" style="display:none">
+          <button class="auth-btn auth-btn-google" id="btnRegGoogle" onclick="signInWithGoogle()">
+            <img src="https://www.google.com/favicon.ico" width="16" alt="Google" /> Registrati con Google
+          </button>
+          <div class="auth-divider">oppure con email</div>
+          <div class="auth-field">
+            <label for="regName">Nome e Cognome</label>
+            <input type="text" id="regName" placeholder="Mario Rossi" autocomplete="name" />
+          </div>
+          <div class="auth-field">
+            <label for="regEmail">Email</label>
+            <input type="email" id="regEmail" placeholder="nome@esempio.it" autocomplete="email" />
+          </div>
+          <div class="auth-field">
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" placeholder="Min. 8 caratteri" autocomplete="new-password" />
+          </div>
+          <div class="auth-field">
+            <label for="regConfirm">Conferma Password</label>
+            <input type="password" id="regConfirm" placeholder="Ripeti la password" autocomplete="new-password"
+              onkeypress="if(event.key==='Enter') registerWithEmail()" />
+          </div>
+          <button class="auth-btn auth-btn-primary" id="btnRegister" onclick="registerWithEmail()">
+            <i class="fas fa-user-plus"></i> Crea Account Gratuito
+          </button>
+          <div style="font-size:.75rem;color:#adb5bd;text-align:center;margin-top:.5rem;line-height:1.5">
+            Registrandoti accetti i <a href="#" style="color:#1A3A5C">Termini di Servizio</a> e la <a href="#"
+              style="color:#1A3A5C">Privacy Policy</a>.
+          </div>
+          <div class="auth-switch">Hai già un account? <a onclick="switchAuthTab('login')">Accedi</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+
+</html>
