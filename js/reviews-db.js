@@ -10,11 +10,16 @@
 
     /* ---------- CRUD ----------------------------------------- */
 
-    /** Legge tutte le recensioni di una scuola */
+    /** Legge tutte le recensioni di una scuola (localStorage + seed) */
     function getReviews(schoolId) {
         try {
             var raw = localStorage.getItem(DB_PREFIX + schoolId);
-            return raw ? JSON.parse(raw) : [];
+            var userReviews = raw ? JSON.parse(raw) : [];
+            // Merge con seed reviews (mostrate solo se non già presenti)
+            var seed = (window.SEED_REVIEWS && window.SEED_REVIEWS[schoolId]) || [];
+            var userIds = userReviews.map(function (r) { return r.id; });
+            var seedNew = seed.filter(function (r) { return userIds.indexOf(r.id) === -1; });
+            return userReviews.concat(seedNew);
         } catch (e) { return []; }
     }
 
