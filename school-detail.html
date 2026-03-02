@@ -1118,11 +1118,35 @@
                 });
             }
 
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', init);
-            } else {
-                init();
+            function waitForDataAndInit() {
+                // Poll every 50ms until MIUR_DATA is available (max 10 seconds)
+                var attempts = 0;
+                var maxAttempts = 200; // 200 * 50ms = 10s
+
+                function tryInit() {
+                    attempts++;
+                    if (window.MIUR_DATA && window.MIUR_DATA.length > 0) {
+                        init();
+                    } else if (attempts >= maxAttempts) {
+                        // Timeout: show error
+                        document.getElementById('schoolHero').innerHTML =
+                            '<div class="school-hero__inner"><div style="color:#fff;">'
+                            + '<strong>Errore di caricamento dati.</strong> '
+                            + '<a href="schools.html" style="color:var(--gold);">Torna alla ricerca</a>'
+                            + '</div></div>';
+                    } else {
+                        setTimeout(tryInit, 50);
+                    }
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', tryInit);
+                } else {
+                    tryInit();
+                }
             }
+
+            waitForDataAndInit();
 
         })();
     </script>
