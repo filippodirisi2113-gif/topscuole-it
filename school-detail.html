@@ -852,6 +852,8 @@
     <script src="js/main.js"></script>
     <script src="data/seed-reviews.js"></script>
     <script src="js/reviews-db.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="js/emailjs-config.js"></script>
     <script src="js/auth.js"></script>
 
     <script>
@@ -1160,43 +1162,70 @@
                 <h2>TopScuole.it</h2>
                 <p>Accedi per recensire le scuole</p>
             </div>
-            <div class="auth-tabs">
-                <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Accedi</button>
-                <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Registrati</button>
-            </div>
-            <div class="auth-body">
-                <div id="authError"></div>
-                <div id="loginPane">
-                    <button class="auth-btn auth-btn-google" id="btnLoginGoogle" onclick="signInWithGoogle()">
-                        <img src="https://www.google.com/favicon.ico" width="16" alt="G" /> Accedi con Google
-                    </button>
-                    <div class="auth-divider">oppure con email</div>
-                    <div class="auth-field"><label>Email</label><input type="email" id="authEmail"
-                            placeholder="nome@esempio.it" /></div>
-                    <div class="auth-field"><label>Password</label><input type="password" id="authPassword"
-                            placeholder="Password" onkeypress="if(event.key==='Enter')signInWithEmail()" /></div>
-                    <button class="auth-btn auth-btn-primary" onclick="signInWithEmail()"><i
-                            class="fas fa-sign-in-alt"></i> Accedi</button>
-                    <div class="auth-switch">Non hai un account? <a onclick="switchAuthTab('register')">Registrati
-                            gratis</a></div>
+            <!-- Pannello principale login/registrazione -->
+            <div id="authPaneWrapper">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Accedi</button>
+                    <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Registrati</button>
                 </div>
-                <div id="registerPane" style="display:none">
-                    <button class="auth-btn auth-btn-google" onclick="signInWithGoogle()"><img
-                            src="https://www.google.com/favicon.ico" width="16" alt="G" /> Registrati con
-                        Google</button>
-                    <div class="auth-divider">oppure con email</div>
-                    <div class="auth-field"><label>Nome e Cognome</label><input type="text" id="regName"
-                            placeholder="Mario Rossi" /></div>
-                    <div class="auth-field"><label>Email</label><input type="email" id="regEmail"
-                            placeholder="nome@esempio.it" /></div>
-                    <div class="auth-field"><label>Password</label><input type="password" id="regPassword"
-                            placeholder="Min. 8 caratteri" /></div>
-                    <div class="auth-field"><label>Conferma Password</label><input type="password" id="regConfirm"
-                            placeholder="Ripeti la password" onkeypress="if(event.key==='Enter')registerWithEmail()" />
+                <div class="auth-body">
+                    <div id="authError"></div>
+                    <div id="loginPane">
+                        <button class="auth-btn auth-btn-google" id="btnLoginGoogle" onclick="signInWithGoogle()"><img
+                                src="https://www.google.com/favicon.ico" width="16" alt="G" /> Accedi con
+                            Google</button>
+                        <div class="auth-divider">oppure con email</div>
+                        <div class="auth-field"><label>Email</label><input type="email" id="authEmail"
+                                placeholder="nome@esempio.it" /></div>
+                        <div class="auth-field"><label>Password</label><input type="password" id="authPassword"
+                                placeholder="Password" onkeypress="if(event.key==='Enter')signInWithEmail()" /></div>
+                        <button class="auth-btn auth-btn-primary" id="btnLoginEmail" onclick="signInWithEmail()"><i
+                                class="fas fa-sign-in-alt"></i> Accedi</button>
+                        <div class="auth-switch">Non hai un account? <a onclick="switchAuthTab('register')">Registrati
+                                gratis</a></div>
                     </div>
-                    <button class="auth-btn auth-btn-primary" onclick="registerWithEmail()"><i
-                            class="fas fa-user-plus"></i> Crea Account Gratuito</button>
-                    <div class="auth-switch">Hai già un account? <a onclick="switchAuthTab('login')">Accedi</a></div>
+                    <div id="registerPane" style="display:none">
+                        <div class="auth-divider" style="margin-top:0">Registrati con email</div>
+                        <div class="auth-field"><label>Nome e Cognome</label><input type="text" id="regName"
+                                placeholder="Mario Rossi" /></div>
+                        <div class="auth-field"><label>Email</label><input type="email" id="regEmail"
+                                placeholder="nome@esempio.it" /></div>
+                        <div class="auth-field"><label>Password</label><input type="password" id="regPassword"
+                                placeholder="Min. 8 caratteri" /></div>
+                        <div class="auth-field"><label>Conferma Password</label><input type="password" id="regConfirm"
+                                placeholder="Ripeti la password"
+                                onkeypress="if(event.key==='Enter')registerWithEmail()" /></div>
+                        <button class="auth-btn auth-btn-primary" id="btnRegister" onclick="registerWithEmail()"><i
+                                class="fas fa-user-plus"></i> Crea Account Gratuito</button>
+                        <div class="auth-switch">Hai già un account? <a onclick="switchAuthTab('login')">Accedi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Pannello verifica OTP -->
+            <div id="otpPane" style="display:none">
+                <div class="auth-body" style="text-align:center;">
+                    <div style="font-size:2.5rem;margin-bottom:.5rem;">📧</div>
+                    <h3 style="color:#0D1B2A;font-size:1.1rem;margin-bottom:.4rem;">Verifica la tua email</h3>
+                    <p style="font-size:.85rem;color:#6c757d;margin-bottom:1.25rem;">Abbiamo inviato un codice a 6 cifre
+                        a<br><strong id="otpEmailDisplay"></strong></p>
+                    <div id="otpDemoInfo"
+                        style="display:none;background:#fffbea;border:1.5px solid #F4C430;border-radius:10px;padding:.75rem;font-size:.82rem;margin-bottom:1rem;">
+                    </div>
+                    <div id="otpError"
+                        style="display:none;background:rgba(220,53,69,.08);border:1px solid rgba(220,53,69,.25);color:#b02a37;padding:.6rem 1rem;border-radius:8px;font-size:.83rem;margin-bottom:.75rem;">
+                    </div>
+                    <input type="text" id="otpInput" maxlength="6" inputmode="numeric" pattern="[0-9]*"
+                        placeholder="000000" onkeypress="if(event.key==='Enter')verifyOTP()"
+                        style="width:100%;text-align:center;font-size:2rem;letter-spacing:.5rem;font-weight:700;padding:.65rem;border:2px solid #e9ecef;border-radius:12px;outline:none;font-family:monospace;box-sizing:border-box;" />
+                    <p style="font-size:.75rem;color:#adb5bd;margin:.5rem 0 1rem;">Il codice scade tra <strong
+                            id="otpCountdown">10:00</strong></p>
+                    <button class="auth-btn auth-btn-primary" id="btnVerifyOtp" onclick="verifyOTP()"
+                        style="margin-bottom:.65rem;"><i class="fas fa-check-circle"></i> Verifica Codice</button>
+                    <div style="font-size:.8rem;color:#6c757d;">Non hai ricevuto il codice? <a onclick="resendOTP()"
+                            style="color:#0D1B2A;font-weight:700;cursor:pointer;">Reinvia</a></div>
+                    <div style="margin-top:.75rem;"><a onclick="showPane('auth')"
+                            style="font-size:.78rem;color:#adb5bd;cursor:pointer;">← Torna indietro</a></div>
                 </div>
             </div>
         </div>
