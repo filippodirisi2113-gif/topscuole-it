@@ -1091,8 +1091,9 @@
       <!-- Search -->
       <div class="search-box animate-scale-in delay-3" id="heroSearch">
         <i class="fas fa-map-marker-alt search-box__icon"></i>
-        <input type="text" class="search-box__input" id="cityInput" autocomplete="off" name="search_home_query"
-          placeholder="Città, CAP o nome scuola..." aria-label="Cerca scuola per città o CAP" />
+        <input type="text" class="search-box__input" id="cityInput" autocomplete="new-password" name="search_home_query"
+          placeholder="Città, CAP o nome scuola..." readonly onfocus="this.removeAttribute('readonly');"
+          aria-label="Cerca scuola per città o CAP" />
         <button class="search-box__btn" onclick="doSearch()" id="searchBtn">
           <i class="fas fa-search"></i> Cerca
         </button>
