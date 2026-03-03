@@ -44,17 +44,6 @@
             justify-content: space-between;
         }
 
-        .navbar__logo {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .navbar__logo span {
-            color: #F4C430;
-        }
-
         .navbar__links {
             display: flex;
             align-items: center;
@@ -846,7 +835,10 @@
 
     <!-- NAVBAR -->
     <nav class="navbar">
-        <a href="index.html" class="navbar__logo">Top<span>Scuole</span>.it</a>
+        <a href="index.html" class="navbar__logo" style="text-decoration:none;">
+            <img src="assets/logo.png" alt="TopScuole.it logo" />
+            <span class="navbar__brand">Top<span>Scuole</span>.it</span>
+        </a>
         <div class="navbar__links">
             <a href="index.html">Home</a>
             <a href="schools.html">Cerca Scuola</a>
