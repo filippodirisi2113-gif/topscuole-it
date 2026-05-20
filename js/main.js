@@ -60,7 +60,9 @@ function initCountUpAnimations() {
                 current = Math.min(current + increment, target);
                 if (target >= 1000) {
                     el.textContent = Math.floor(current).toLocaleString('it-IT') + '+';
-                } else if (target <= 110) {
+                } else if (target === 107) {
+                    el.textContent = Math.floor(current);
+                } else if (target <= 100) {
                     el.textContent = Math.floor(current) + '%';
                 } else {
                     el.textContent = Math.floor(current) + '+';
