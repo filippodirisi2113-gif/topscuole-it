@@ -785,6 +785,7 @@
       background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
       padding: 6rem 2rem;
       color: var(--white);
+      overflow: visible;
     }
 
     .review-preview-inner {
@@ -1164,91 +1165,504 @@
   <!-- TOP SCHOOLS PREVIEW -->
   <section class="top-schools" id="top-scuole">
     <div class="section-header reveal">
-      <span class="eyebrow">Classifica Aggiornata 2026</span>
+      <span class="eyebrow">Classifica Aggiornata 2024</span>
       <h2>Le scuole superiori meglio valutate in Italia</h2>
-      <p>Classifica basata sulle recensioni degli studenti e verificata con i dati ufficiali MIUR degli ultimi 12 mesi
-      </p>
+      <p>Classifica basata su dati ufficiali e recensioni di studenti e famiglie. Scopri i migliori istituti per ogni indirizzo di studio.</p>
     </div>
-    <div class="schools-grid">
 
-      <a href="school-detail.html" class="school-card hover-lift reveal delay-1">
+    <!-- Filtri per tipo -->
+    <div class="ranking-tabs reveal" style="display:flex;justify-content:center;gap:.75rem;margin-bottom:2.5rem;flex-wrap:wrap;">
+      <button class="ranking-tab active" onclick="switchRankingTab(this,'scientifico')">🔬 Licei Scientifici</button>
+      <button class="ranking-tab" onclick="switchRankingTab(this,'classico')">📚 Licei Classici</button>
+      <button class="ranking-tab" onclick="switchRankingTab(this,'tecnico')">⚙️ Istituti Tecnici</button>
+    </div>
+
+    <!-- LICEI SCIENTIFICI -->
+    <div class="schools-grid ranking-panel" id="panel-scientifico">
+
+      <a href="school-detail.html?id=MIPS08000T" class="school-card hover-lift reveal delay-1">
+        <div class="school-card__header" style="position:relative;">
+          <div class="school-card__rank">🥇 1° Milano</div>
+          <div class="school-initials">AV</div>
+          <div class="school-card__score">
+            <span class="score-num">4.9</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">Liceo Scientifico Alessandro Volta</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Benedetto Croce 8, Milano</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ FGA 87,39</span>
+            <span class="badge badge-blue">🏛️ Cod. MIPS08000T</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 · Fondazione Agnelli</div>
+        </div>
+      </a>
+
+      <a href="school-detail.html?id=RMPS49000A" class="school-card hover-lift reveal delay-2">
         <div class="school-card__header">
-          <div class="school-initials">LB</div>
+          <div class="school-card__rank">🥇 1° Roma</div>
+          <div class="school-initials">AR</div>
           <div class="school-card__score">
             <span class="score-num">4.8</span>
             <span class="score-label">/ 5.0 ★</span>
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Scientifico A. Banfi</div>
-          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Romagna 12, Milano</div>
+          <div class="school-card__name">Liceo Scientifico Augusto Righi</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Bordonaro 7, Roma</div>
           <div class="school-card__cats">
-            <span class="badge badge-gold">⭐ Top Didattica</span>
-            <span class="badge badge-green">✓ 241 Recensioni</span>
+            <span class="badge badge-gold">⭐ FGA 88,35</span>
+            <span class="badge badge-blue">🏛️ Cod. RMPS49000A</span>
           </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 · Fondazione Agnelli</div>
         </div>
       </a>
 
-      <a href="school-detail.html" class="school-card hover-lift reveal delay-2">
+      <a href="school-detail.html?id=FIPS090001" class="school-card hover-lift reveal delay-3">
         <div class="school-card__header">
-          <div class="school-initials">IT</div>
+          <div class="school-card__rank">🥇 1° Firenze</div>
+          <div class="school-initials">GG</div>
+          <div class="school-card__score">
+            <span class="score-num">4.8</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">Liceo Scientifico Galileo Galilei</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Benedetto Varchi 14, Firenze</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Top Scientifico Firenze</span>
+            <span class="badge badge-blue">🏛️ Cod. FIPS090001</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 · Fondazione Agnelli</div>
+        </div>
+      </a>
+
+      <a href="school-detail.html?id=TOPS041018" class="school-card hover-lift reveal delay-4">
+        <div class="school-card__header">
+          <div class="school-card__rank">🥇 1° Torino</div>
+          <div class="school-initials">AS</div>
           <div class="school-card__score">
             <span class="score-num">4.7</span>
             <span class="score-label">/ 5.0 ★</span>
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">ITIS G. Marconi</div>
-          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Corso Unità d'Italia 4, Torino</div>
+          <div class="school-card__name">Liceo Scientifico Altiero Spinelli</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via XXV Aprile 141, Nichelino (TO)</div>
           <div class="school-card__cats">
-            <span class="badge badge-gold">⭐ Top Strutture</span>
-            <span class="badge badge-green">✓ 187 Recensioni</span>
+            <span class="badge badge-gold">⭐ FGA 86,92</span>
+            <span class="badge badge-blue">🏛️ Cod. TOPS041018</span>
           </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 · Fondazione Agnelli</div>
         </div>
       </a>
 
-      <a href="school-detail.html" class="school-card hover-lift reveal delay-3">
+      <a href="school-detail.html?id=BOPS01000C" class="school-card hover-lift reveal delay-5">
         <div class="school-card__header">
-          <div class="school-initials">LC</div>
+          <div class="school-card__rank">🥇 1° Bologna</div>
+          <div class="school-initials">NC</div>
+          <div class="school-card__score">
+            <span class="score-num">4.7</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">Liceo Scientifico Nicolò Copernico</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Garavaglia 11, Bologna</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Top Scientifico Bologna</span>
+            <span class="badge badge-blue">🏛️ Cod. BOPS01000C</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 · Fondazione Agnelli</div>
+        </div>
+      </a>
+
+      <a href="school-detail.html?id=SOPS00401T" class="school-card hover-lift reveal delay-6">
+        <div class="school-card__header">
+          <div class="school-card__rank">🏆 #1 Italia</div>
+          <div class="school-initials">NF</div>
+          <div class="school-card__score">
+            <span class="score-num">5.0</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">Liceo Scientifico Nervi-Ferrari</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Lungo Mallero Diaz 11, Morbegno (SO)</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ FGA 90,55 — Miglior d'Italia</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 · Fondazione Agnelli</div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- LICEI CLASSICI -->
+    <div class="schools-grid ranking-panel" id="panel-classico" style="display:none;">
+
+      <a href="school-detail.html?id=RMPC250005" class="school-card hover-lift reveal delay-1">
+        <div class="school-card__header">
+          <div class="school-card__rank">🥇 Top Roma</div>
+          <div class="school-initials">LT</div>
+          <div class="school-card__score">
+            <span class="score-num">4.9</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">Liceo Classico Torquato Tasso</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Sicilia 168, Roma</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Eccellenza storica</span>
+            <span class="badge badge-blue">🏛️ Cod. RMPC250005</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 · Fondazione Agnelli</div>
+        </div>
+      </a>
+
+      <a href="school-detail.html?id=RMPC01000R" class="school-card hover-lift reveal delay-2">
+        <div class="school-card__header">
+          <div class="school-card__rank">🥇 FGA Roma</div>
+          <div class="school-initials">EV</div>
+          <div class="school-card__score">
+            <span class="score-num">4.9</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">Liceo Classico E.Q. Visconti</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Recchi 8, Roma</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ FGA 80,65 — #1 Roma</span>
+            <span class="badge badge-blue">🏛️ Cod. RMPC01000R</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 · Fondazione Agnelli</div>
+        </div>
+      </a>
+
+      <a href="school-detail.html?id=BOPC01201C" class="school-card hover-lift reveal delay-3">
+        <div class="school-card__header">
+          <div class="school-card__rank">🥇 #1 Bologna</div>
+          <div class="school-initials">LG</div>
+          <div class="school-card__score">
+            <span class="score-num">4.9</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">Liceo Classico Luigi Galvani</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Castiglione 38, Bologna</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Top Classico Bologna</span>
+            <span class="badge badge-blue">🏛️ Cod. BOPC01201C</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 · Fondazione Agnelli</div>
+        </div>
+      </a>
+
+      <a href="school-detail.html?id=TOPC04000B" class="school-card hover-lift reveal delay-4">
+        <div class="school-card__header">
+          <div class="school-card__rank">🥇 #1 Torino</div>
+          <div class="school-initials">VG</div>
+          <div class="school-card__score">
+            <span class="score-num">4.8</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">Liceo Classico Vincenzo Gioberti</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Revel 4, Torino</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Top Classico Torino</span>
+            <span class="badge badge-blue">🏛️ Cod. TOPC04000B</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 · Fondazione Agnelli</div>
+        </div>
+      </a>
+
+      <a href="school-detail.html?id=MIPC02000B" class="school-card hover-lift reveal delay-5">
+        <div class="school-card__header">
+          <div class="school-card__rank">🏆 Storico Milano</div>
+          <div class="school-initials">GP</div>
+          <div class="school-card__score">
+            <span class="score-num">4.8</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">Liceo Classico Giuseppe Parini</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Goito 4, Milano</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Eccellenza Umanistica</span>
+            <span class="badge badge-blue">🏛️ Cod. MIPC02000B</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 · Fondazione Agnelli</div>
+        </div>
+      </a>
+
+      <a href="school-detail.html?id=FIPC001014" class="school-card hover-lift reveal delay-6">
+        <div class="school-card__header">
+          <div class="school-card__rank">🥇 Top Firenze</div>
+          <div class="school-initials">NM</div>
+          <div class="school-card__score">
+            <span class="score-num">4.8</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">Liceo Classico Niccolò Machiavelli</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Santo Spirito 39, Firenze</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Top Classico Firenze</span>
+            <span class="badge badge-blue">🏛️ Cod. FIPC001014</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 · Fondazione Agnelli</div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- ISTITUTI TECNICI -->
+    <div class="schools-grid ranking-panel" id="panel-tecnico" style="display:none;">
+
+      <a href="school-detail.html?id=MITF070009" class="school-card hover-lift reveal delay-1">
+        <div class="school-card__header">
+          <div class="school-card__rank">🥇 Top Milano</div>
+          <div class="school-initials">GF</div>
+          <div class="school-card__score">
+            <span class="score-num">4.8</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">ITIS Giacomo Feltrinelli</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Piazza Tito Lucrezio Caro 8, Milano</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Top Lab Informatica</span>
+            <span class="badge badge-blue">🏛️ Cod. MITF070009</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: MIUR Open Data 2024/25</div>
+        </div>
+      </a>
+
+      <a href="school-detail.html?id=PRTF010006" class="school-card hover-lift reveal delay-2">
+        <div class="school-card__header">
+          <div class="school-card__rank">🥇 Top Parma</div>
+          <div class="school-initials">LV</div>
+          <div class="school-card__score">
+            <span class="score-num">4.8</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">ITIS Leonardo da Vinci</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Toscana 10, Parma</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Alternanza Top</span>
+            <span class="badge badge-blue">🏛️ Cod. PRTF010006</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 — Tecnici</div>
+        </div>
+      </a>
+
+      <a href="school-detail.html?id=TSTF010008" class="school-card hover-lift reveal delay-3">
+        <div class="school-card__header">
+          <div class="school-card__rank">🥇 Top Trieste</div>
+          <div class="school-initials">AV</div>
+          <div class="school-card__score">
+            <span class="score-num">4.7</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">ITIS Alessandro Volta</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Monte Grappa 1, Trieste</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Eccellenza Nordest</span>
+            <span class="badge badge-blue">🏛️ Cod. TSTF010008</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 — Tecnici</div>
+        </div>
+      </a>
+
+      <a href="school-detail.html?id=BGTF029015" class="school-card hover-lift reveal delay-4">
+        <div class="school-card__header">
+          <div class="school-card__rank">🥇 Top Bergamo</div>
+          <div class="school-initials">CC</div>
+          <div class="school-card__score">
+            <span class="score-num">4.7</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">ITIS Caterina Caniana</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Polaresco 15, Bergamo</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Design & Moda ITIS</span>
+            <span class="badge badge-blue">🏛️ Cod. BGTF029015</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: MIUR Open Data 2024/25</div>
+        </div>
+      </a>
+
+      <a href="school-detail.html?id=TOTF013016" class="school-card hover-lift reveal delay-5">
+        <div class="school-card__header">
+          <div class="school-card__rank">🥇 Top Torino</div>
+          <div class="school-initials">BP</div>
+          <div class="school-card__score">
+            <span class="score-num">4.7</span>
+            <span class="score-label">/ 5.0 ★</span>
+          </div>
+        </div>
+        <div class="school-card__body">
+          <div class="school-card__name">ITIS Bodoni-Paravia</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Ponchielli 56, Torino</div>
+          <div class="school-card__cats">
+            <span class="badge badge-gold">⭐ Top ITS Torino</span>
+            <span class="badge badge-blue">🏛️ Cod. TOTF013016</span>
+          </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 — Tecnici</div>
+        </div>
+      </a>
+
+      <a href="school-detail.html?id=PITF030003" class="school-card hover-lift reveal delay-6">
+        <div class="school-card__header">
+          <div class="school-card__rank">🥇 Top Toscana</div>
+          <div class="school-initials">GM</div>
           <div class="school-card__score">
             <span class="score-num">4.6</span>
             <span class="score-label">/ 5.0 ★</span>
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Classico T. Livio</div>
-          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Prato, Bologna</div>
+          <div class="school-card__name">ITIS Guglielmo Marconi</div>
+          <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Milano 51, Pontedera (PI)</div>
           <div class="school-card__cats">
-            <span class="badge badge-gold">⭐ Top Comunità</span>
-            <span class="badge badge-green">✓ 164 Recensioni</span>
+            <span class="badge badge-gold">⭐ Automotive & Tech</span>
+            <span class="badge badge-blue">🏛️ Cod. PITF030003</span>
           </div>
+          <div class="school-eduscopio-note">Fonte: Eduscopio 2024 — Tecnici</div>
         </div>
       </a>
+
     </div>
 
     <div style="text-align:center;margin-top:2.5rem;" class="reveal">
+
       <a href="schools.html" class="btn btn-outline" style="background:var(--white);">
         <i class="fas fa-th-list"></i> Vedi tutte le scuole
       </a>
     </div>
   </section>
 
+  <style>
+    .ranking-tab {
+      background: var(--white);
+      border: 2px solid var(--gray-200);
+      border-radius: 999px;
+      padding: .6rem 1.4rem;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Inter', sans-serif;
+    }
+    .ranking-tab.active, .ranking-tab:hover {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: var(--white);
+    }
+    .school-card__rank {
+      position: absolute;
+      top: .6rem;
+      left: .75rem;
+      font-size: .68rem;
+      font-weight: 800;
+      background: rgba(244,196,48,.2);
+      color: var(--gold);
+      border-radius: 999px;
+      padding: .15rem .55rem;
+      letter-spacing: .5px;
+    }
+    .school-card__header { position: relative; }
+    .school-eduscopio-note {
+      font-size: .68rem;
+      color: var(--gray-400);
+      margin-top: .6rem;
+      font-style: italic;
+    }
+    .badge-blue {
+      background: rgba(26,58,92,.1);
+      color: var(--navy);
+    }
+    .ranking-panel .school-initials {
+      display: none;
+    }
+    .ranking-panel .school-card__header {
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: .5rem;
+      padding: 1.75rem 1.5rem 1.5rem;
+    }
+    .ranking-panel .school-card__score {
+      text-align: center;
+    }
+    .ranking-panel .school-card__score .score-num {
+      font-size: 2.4rem;
+    }
+    .ranking-panel .school-card__rank {
+      position: static;
+      display: inline-block;
+    }
+    .school-eduscopio-note {
+      display: none;
+    }
+    .schools-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 900px) {
+      .schools-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 580px) {
+      .schools-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <script>
+    function switchRankingTab(btn, panelId) {
+      document.querySelectorAll('.ranking-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.ranking-panel').forEach(p => p.style.display = 'none');
+      document.getElementById('panel-' + panelId).style.display = 'grid';
+    }
+  </script>
+
   <!-- REVIEW PREVIEW / CATEGORIES -->
   <section class="review-preview">
-    <div class="review-preview-inner">
-      <div class="review-preview__left reveal slide-left">
-        <div class="section-header" style="text-align:left;margin-bottom:2rem;">
-          <span class="eyebrow">5 Criteri di Valutazione</span>
-          <h2 style="color:var(--white);">Recensioni precise,<br /><em class="gradient-text">non generiche</em></h2>
-          <p>Non un voto unico, ma 5 dimensioni di valutazione per aiutarti a capire davvero cosa aspettarti.</p>
-        </div>
+    <div style="max-width:1100px;margin:0 auto;padding:0 2rem;">
+
+      <!-- Intestazione centrata -->
+      <div class="section-header reveal" style="text-align:center;margin-bottom:3rem;">
+        <span class="eyebrow" style="background:rgba(244,196,48,.15);border-color:rgba(244,196,48,.3);color:var(--gold);">5 Criteri di Valutazione</span>
+        <h2 style="color:var(--white);">Valuta ogni aspetto,<br><em class="gradient-text" style="display:inline-block;padding:0 4px 4px;">non solo il voto</em></h2>
+        <p style="color:rgba(255,255,255,.6);max-width:520px;margin:0 auto 1.75rem;">Non un voto unico, ma 5 dimensioni di valutazione per aiutarti a capire davvero cosa aspettarti.</p>
         <a href="school-detail.html" class="btn btn-primary">
           <i class="fas fa-pen"></i> Lascia una Recensione
         </a>
       </div>
 
-      <div class="reveal delay-3">
-        <div class="categories-list" style="margin-bottom:2rem;">
+      <!-- Due colonne affiancate -->
+      <div class="rp-columns reveal delay-2">
+
+        <!-- Colonna sinistra: elenco categorie -->
+        <div class="categories-list">
           <div class="cat-item">
             <span class="cat-icon">🎓</span>
             <div class="cat-info">
@@ -1311,7 +1725,7 @@
           </div>
         </div>
 
-        <!-- Review Mockup -->
+        <!-- Colonna destra: recensione mockup -->
         <div class="review-mockup">
           <div class="review-mockup__header">
             <div class="review-mockup__avatar">M</div>
@@ -1356,9 +1770,30 @@
             vivamente."
           </div>
         </div>
+
       </div>
     </div>
   </section>
+
+  <style>
+    .review-preview {
+      padding: 5rem 0 6rem;
+      overflow: visible;
+    }
+    .rp-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      overflow: visible;
+    }
+    .rp-columns .categories-list {
+      overflow: visible;
+    }
+    @media (max-width: 720px) {
+      .rp-columns { grid-template-columns: 1fr; }
+    }
+  </style>
 
   <!-- CTA BANNER -->
   <section class="cta-banner">
