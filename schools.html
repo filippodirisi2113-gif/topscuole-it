@@ -711,6 +711,12 @@
         <select id="regionFilter" style="display:none" onchange="filterSchools()">
             <option value="">Tutte le regioni</option>
         </select>
+        <select id="provinceFilter" style="display:none" onchange="filterSchools()">
+            <option value="">Tutte le province</option>
+        </select>
+        <select id="cityFilter" style="display:none" onchange="filterSchools()">
+            <option value="">Tutti i comuni</option>
+        </select>
         <select id="ratingFilter" style="display:none" onchange="filterSchools()">
             <option value="0">Tutti i voti</option>
             <option value="4">★ 4+ stelle</option>
@@ -747,6 +753,30 @@
             </button>
             <div class="csel__menu" id="csel-region-menu">
                 <div class="csel__item active" onclick="csSelect('csel-region','regionFilter','','Tutte le regioni',this)"><i class="fas fa-check csel__check"></i>Tutte le regioni</div>
+                <!-- Popolato da JS -->
+            </div>
+        </div>
+
+        <!-- Custom dropdown: Provincia -->
+        <div class="csel" id="csel-province">
+            <button class="csel__btn" type="button" onclick="csToggle('csel-province')">
+                <span class="csel__label">Province</span>
+                <i class="fas fa-chevron-down csel__arrow"></i>
+            </button>
+            <div class="csel__menu" id="csel-province-menu">
+                <div class="csel__item active" onclick="csSelect('csel-province','provinceFilter','','Tutte le province',this)"><i class="fas fa-check csel__check"></i>Tutte le province</div>
+                <!-- Popolato da JS -->
+            </div>
+        </div>
+
+        <!-- Custom dropdown: Comune -->
+        <div class="csel" id="csel-city">
+            <button class="csel__btn" type="button" onclick="csToggle('csel-city')">
+                <span class="csel__label">Città</span>
+                <i class="fas fa-chevron-down csel__arrow"></i>
+            </button>
+            <div class="csel__menu" id="csel-city-menu">
+                <div class="csel__item active" onclick="csSelect('csel-city','cityFilter','','Tutti i comuni',this)"><i class="fas fa-check csel__check"></i>Tutti i comuni</div>
                 <!-- Popolato da JS -->
             </div>
         </div>
@@ -917,32 +947,38 @@
         }
       });
 
-      // Hook buildRegionFilter: popola anche il custom dropdown regioni
+      // Hook buildRegionFilter: popola anche il custom dropdown regioni, province e comuni
       document.addEventListener('DOMContentLoaded', function() {
-        var _orig = window.buildRegionFilter;
-        // polliamo finché map.js non ha esportato buildRegionFilter
+        // polliamo finché map.js non ha popolato i filtri
         var tries = 0;
-        function hookRegion() {
+        function hookFilters() {
           if (tries++ > 40) return;
-          // quando regionFilter ha opzioni (oltre la prima), popoliamo csel-region-menu
-          var sel = document.getElementById('regionFilter');
-          if (sel && sel.options.length > 1) {
-            var menu = document.getElementById('csel-region-menu');
-            if (!menu) return;
-            // aggiungi le regioni mancanti
-            for (var i = 1; i < sel.options.length; i++) {
-              var v = sel.options[i].value;
-              var d = document.createElement('div');
-              d.className = 'csel__item';
-              d.innerHTML = '<i class="fas fa-map-marker-alt csel__check"></i>' + v;
-              d.setAttribute('onclick', 'csSelect(\'csel-region\',\'regionFilter\',\'' + v.replace(/'/g,"\\'") + '\',\'' + v.replace(/'/g,"\\'") + '\',this)');
-              menu.appendChild(d);
+          var selR = document.getElementById('regionFilter');
+          var selP = document.getElementById('provinceFilter');
+          var selC = document.getElementById('cityFilter');
+          
+          if (selR && selR.options.length > 1) {
+            function popMenu(selId, menuId, csId, icon) {
+              var sel = document.getElementById(selId);
+              var menu = document.getElementById(menuId);
+              if (!sel || !menu) return;
+              for (var i = 1; i < sel.options.length; i++) {
+                var v = sel.options[i].value;
+                var d = document.createElement('div');
+                d.className = 'csel__item';
+                d.innerHTML = '<i class="fas ' + icon + ' csel__check"></i>' + v;
+                d.setAttribute('onclick', 'csSelect(\'' + csId + '\',\'' + selId + '\',\'' + v.replace(/'/g,"\\'") + '\',\'' + v.replace(/'/g,"\\'") + '\',this)');
+                menu.appendChild(d);
+              }
             }
+            popMenu('regionFilter', 'csel-region-menu', 'csel-region', 'fa-map-marker-alt');
+            popMenu('provinceFilter', 'csel-province-menu', 'csel-province', 'fa-map-pin');
+            popMenu('cityFilter', 'csel-city-menu', 'csel-city', 'fa-city');
           } else {
-            setTimeout(hookRegion, 150);
+            setTimeout(hookFilters, 150);
           }
         }
-        setTimeout(hookRegion, 300);
+        setTimeout(hookFilters, 300);
       });
     </script>
 

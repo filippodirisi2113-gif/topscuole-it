@@ -188,6 +188,8 @@
     var qLow = query.toLowerCase();
     var type = document.getElementById('typeFilter') ? document.getElementById('typeFilter').value : '';
     var regione = document.getElementById('regionFilter') ? document.getElementById('regionFilter').value : '';
+    var provincia = document.getElementById('provinceFilter') ? document.getElementById('provinceFilter').value : '';
+    var comune = document.getElementById('cityFilter') ? document.getElementById('cityFilter').value : '';
     var minRat = parseFloat(document.getElementById('ratingFilter') ? document.getElementById('ratingFilter').value : '0') || 0;
 
     filtered = SCHOOLS_DATA.filter(function (s) {
@@ -195,8 +197,10 @@
         .some(function (f) { return (f || '').toLowerCase().indexOf(qLow) !== -1; });
       var matchT = !type || s.tipo.toLowerCase().indexOf(type.toLowerCase()) !== -1;
       var matchR = !regione || (s.regione || '').toLowerCase().indexOf(regione.toLowerCase()) !== -1;
+      var matchP = !provincia || (s.provincia || '').toLowerCase().indexOf(provincia.toLowerCase()) !== -1;
+      var matchC = !comune || (s.comune || '').toLowerCase().indexOf(comune.toLowerCase()) !== -1;
       var matchV = !minRat || (s.score !== null && s.score >= minRat);
-      return matchQ && matchT && matchR && matchV;
+      return matchQ && matchT && matchR && matchP && matchC && matchV;
     });
 
     currentPage = 0;
@@ -224,14 +228,34 @@
 
   /* ---- Populate region filter ---- */
   function buildRegionFilter() {
-    var sel = document.getElementById('regionFilter');
-    if (!sel) return;
-    var regions = {};
-    SCHOOLS_DATA.forEach(function (s) { if (s.regione) regions[s.regione] = true; });
+    var selR = document.getElementById('regionFilter');
+    var selP = document.getElementById('provinceFilter');
+    var selC = document.getElementById('cityFilter');
+    if (!selR) return;
+    
+    var regions = {}, provinces = {}, cities = {};
+    SCHOOLS_DATA.forEach(function (s) { 
+      if (s.regione) regions[s.regione] = true; 
+      if (s.provincia) provinces[s.provincia] = true;
+      if (s.comune) cities[s.comune] = true;
+    });
+
     Object.keys(regions).sort().forEach(function (r) {
       var opt = document.createElement('option');
       opt.value = r; opt.textContent = r;
-      sel.appendChild(opt);
+      selR.appendChild(opt);
+    });
+    
+    if (selP) Object.keys(provinces).sort().forEach(function (p) {
+      var opt = document.createElement('option');
+      opt.value = p; opt.textContent = p;
+      selP.appendChild(opt);
+    });
+    
+    if (selC) Object.keys(cities).sort().forEach(function (c) {
+      var opt = document.createElement('option');
+      opt.value = c; opt.textContent = c;
+      selC.appendChild(opt);
     });
   }
 
