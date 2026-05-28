@@ -93,10 +93,11 @@
       });
     },
 
-    /* ---- Assicura che SCHOOLS_DATA sia disponibile ---- */
+    /* ---- Assicura che SCHOOLS_DATA/MIUR_DATA sia disponibile ---- */
     _ensureData: function (opts, callback) {
+      var data = window.SCHOOLS_DATA || window.MIUR_DATA;
       // Se il dato è già disponibile globalmente
-      if (typeof SCHOOLS_DATA !== 'undefined' && SCHOOLS_DATA.length) {
+      if (typeof data !== 'undefined' && data.length) {
         this.dataLoaded = true;
         if (callback) callback();
         return;
@@ -106,7 +107,9 @@
         if (callback) {
           var self = this;
           var checkInterval = setInterval(function () {
-            if (self.dataLoaded) {
+            var currentData = window.SCHOOLS_DATA || window.MIUR_DATA;
+            if (self.dataLoaded || (typeof currentData !== 'undefined' && currentData.length)) {
+              self.dataLoaded = true;
               clearInterval(checkInterval);
               callback();
             }
@@ -120,6 +123,9 @@
       var script = document.createElement('script');
       script.src = (opts.dataPath || 'data/schools-data.js');
       script.onload = function () {
+        if (typeof window.SCHOOLS_DATA === 'undefined' && typeof window.MIUR_DATA !== 'undefined') {
+          window.SCHOOLS_DATA = window.MIUR_DATA;
+        }
         self.dataLoaded = true;
         self.dataLoading = false;
         if (callback) callback();
@@ -149,14 +155,15 @@
 
     /* ---- Ricerca intelligente ---- */
     _search: function (query) {
-      if (!query || typeof SCHOOLS_DATA === 'undefined') return [];
+      var data = window.SCHOOLS_DATA || window.MIUR_DATA;
+      if (!query || typeof data === 'undefined') return [];
 
       var q = query.toLowerCase().trim();
       var schools = [];
       var cities = {};
       var regions = {};
 
-      SCHOOLS_DATA.forEach(function (s) {
+      data.forEach(function (s) {
         var nome = (s.nome || '').toLowerCase();
         var comune = (s.comune || '').toLowerCase();
         var provincia = (s.provincia || '').toLowerCase();
