@@ -32,6 +32,7 @@
       // Crea il container del dropdown
       var wrapper = input.parentElement;
       wrapper.style.position = 'relative';
+      wrapper.style.zIndex = '100'; // Evita sovrapposizione da altri elementi (come stats-bar)
 
       var dropdown = document.createElement('div');
       dropdown.className = 'ac-dropdown';
@@ -381,6 +382,7 @@
         overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: #e9ecef transparent;
+        text-align: left; /* Forza allineamento a sinistra */
       }
       .ac-dropdown--open {
         display: block;
@@ -399,6 +401,7 @@
         display: flex;
         align-items: center;
         gap: 6px;
+        text-align: left; /* Forza allineamento a sinistra */
       }
       .ac-group-header:first-child { padding-top: 12px; }
       .ac-item {
@@ -408,6 +411,7 @@
         padding: 10px 16px;
         cursor: pointer;
         transition: background .12s ease;
+        text-align: left; /* Forza allineamento a sinistra */
       }
       .ac-item:hover,
       .ac-item--active {
@@ -436,6 +440,8 @@
         display: flex;
         flex-direction: column;
         gap: 2px;
+        align-items: flex-start; /* Forza allineamento a sinistra del flex container */
+        text-align: left; /* Forza allineamento a sinistra del testo */
       }
       .ac-item__label {
         font-size: .9rem;
