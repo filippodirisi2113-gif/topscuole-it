@@ -369,16 +369,20 @@
       .ac-dropdown {
         display: none;
         position: absolute;
-        top: calc(100% + 6px);
+        top: calc(100% + 8px);
         left: 0;
         right: 0;
-        background: #fff;
-        border-radius: 16px;
-        border: 2px solid #0D1B2A; /* Bordo navy scuro per staccare nettamente dal bianco */
-        box-shadow: 0 30px 60px rgba(13,27,42,.28), 0 10px 20px rgba(13,27,42,.15);
+        background: #ffffff;
+        border-radius: 18px;
+        border: 1px solid rgba(13, 27, 42, 0.08); /* Sottile bordo grigio/navy per dare definizione */
+        /* Stratificazione di ombreggiature grigie per un effetto 3D morbido e realistico */
+        box-shadow: 
+          0 30px 60px -15px rgba(13, 27, 42, 0.22), 
+          0 15px 30px -10px rgba(13, 27, 42, 0.12), 
+          0 0 1px 1px rgba(13, 27, 42, 0.03);
         z-index: 1100;
         overflow: hidden;
-        animation: acFadeIn .15s ease;
+        animation: acFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
         max-height: 420px;
         overflow-y: auto;
         scrollbar-width: thin;
@@ -389,11 +393,11 @@
         display: block;
       }
       @keyframes acFadeIn {
-        from { opacity: 0; transform: translateY(-6px); }
-        to   { opacity: 1; transform: translateY(0); }
+        from { opacity: 0; transform: translateY(-8px) scale(0.985); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
       }
       .ac-group-header {
-        padding: 8px 16px 4px;
+        padding: 10px 16px 4px;
         font-size: .68rem;
         font-weight: 700;
         letter-spacing: .08em;
@@ -404,19 +408,20 @@
         gap: 6px;
         text-align: left; /* Forza allineamento a sinistra */
       }
-      .ac-group-header:first-child { padding-top: 12px; }
+      .ac-group-header:first-child { padding-top: 14px; }
       .ac-item {
         display: flex;
         align-items: center;
         gap: 12px;
-        padding: 10px 16px;
+        padding: 11px 16px;
         cursor: pointer;
-        transition: background .12s ease;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); /* Transizione Apple-like fluida */
         text-align: left; /* Forza allineamento a sinistra */
       }
       .ac-item:hover,
       .ac-item--active {
-        background: rgba(244,196,48,.09);
+        background: rgba(244, 196, 48, 0.08);
+        transform: translateX(5px); /* Micro-spostamento dinamico a destra */
       }
       .ac-item__icon {
         width: 32px;
