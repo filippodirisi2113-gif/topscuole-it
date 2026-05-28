@@ -374,7 +374,7 @@
         right: 0;
         background: #ffffff;
         border-radius: 18px;
-        border: 1px solid rgba(13, 27, 42, 0.08); /* Sottile bordo grigio/navy per dare definizione */
+        border: 1.5px solid rgba(244, 196, 48, 0.45); /* Bordo dorato semitrasparente (colore brand) per un look premium */
         /* Stratificazione di ombreggiature grigie per un effetto 3D morbido e realistico */
         box-shadow: 
           0 30px 60px -15px rgba(13, 27, 42, 0.22), 
