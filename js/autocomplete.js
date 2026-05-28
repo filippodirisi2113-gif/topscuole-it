@@ -374,7 +374,8 @@
         right: 0;
         background: #fff;
         border-radius: 16px;
-        box-shadow: 0 20px 60px rgba(13,27,42,.18), 0 0 0 1.5px rgba(244,196,48,.25);
+        border: 2px solid #0D1B2A; /* Bordo navy scuro per staccare nettamente dal bianco */
+        box-shadow: 0 30px 60px rgba(13,27,42,.28), 0 10px 20px rgba(13,27,42,.15);
         z-index: 1100;
         overflow: hidden;
         animation: acFadeIn .15s ease;
