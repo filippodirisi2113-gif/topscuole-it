@@ -399,9 +399,94 @@ input, textarea, select { font-family: var(--font); }
 .mt-2 { margin-top: 1rem; }
 .mt-3 { margin-top: 1.5rem; }
 
+/* --- Hamburger Button --- */
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background .2s;
+  background: none;
+  border: none;
+}
+.navbar__hamburger:hover { background: rgba(255,255,255,.08); }
+.navbar__hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+  transform-origin: center;
+}
+.navbar__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.navbar__hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.navbar__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* --- Mobile Menu Overlay --- */
+.navbar__mobile-menu {
+  display: none;
+  position: fixed;
+  top: 70px;
+  left: 0; right: 0;
+  background: rgba(13,27,42,.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(244,196,48,.15);
+  padding: 1.5rem 2rem;
+  flex-direction: column;
+  gap: .25rem;
+  z-index: 999;
+  animation: slideDown .2s ease;
+}
+@keyframes slideDown {
+  from { opacity:0; transform: translateY(-8px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+.navbar__mobile-menu.open { display: flex; }
+.navbar__mobile-menu a,
+.navbar__mobile-menu button {
+  color: rgba(255,255,255,.85);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: .75rem 1rem;
+  border-radius: 10px;
+  transition: background .15s, color .15s;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  text-decoration: none;
+  border: none;
+  background: none;
+  font-family: var(--font);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.navbar__mobile-menu a:hover,
+.navbar__mobile-menu button:hover {
+  background: rgba(244,196,48,.1);
+  color: var(--gold);
+}
+.navbar__mobile-menu .mobile-cta {
+  margin-top: .5rem;
+  background: var(--gold);
+  color: var(--navy) !important;
+  font-weight: 700;
+  justify-content: center;
+  border-radius: var(--radius-full);
+}
+.navbar__mobile-menu .mobile-cta:hover {
+  background: var(--gold-light) !important;
+  color: var(--navy) !important;
+}
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
   .navbar__links { display: none; }
+  .navbar__hamburger { display: flex; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
 }
 

@@ -1054,7 +1054,40 @@
         </div>
       </li>
     </ul>
+
+    <!-- Hamburger -->
+    <button class="navbar__hamburger" id="navHamburger" aria-label="Apri menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- Mobile Menu -->
+  <div class="navbar__mobile-menu" id="mobileMenu">
+    <a href="schools.html"><i class="fas fa-search"></i> Cerca Scuole</a>
+    <a href="#"><i class="fas fa-trophy"></i> Classifiche</a>
+    <a href="come-funziona.html"><i class="fas fa-info-circle"></i> Come Funziona</a>
+    <button class="mobile-cta" onclick="openAuthModal('login'); closeMobileMenu()">
+      <i class="fas fa-user"></i> Accedi
+    </button>
+  </div>
+
+  <script>
+    function toggleMobileMenu() {
+      var menu = document.getElementById('mobileMenu');
+      var btn = document.getElementById('navHamburger');
+      menu.classList.toggle('open');
+      btn.classList.toggle('open');
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.getElementById('navHamburger').classList.remove('open');
+    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.navbar') && !e.target.closest('.navbar__mobile-menu')) {
+        closeMobileMenu();
+      }
+    });
+  </script>
 
   <!-- MIUR Attribution Banner -->
   <div class="miur-banner" id="miurStaticBanner">
@@ -1090,14 +1123,16 @@
       </p>
 
       <!-- Search -->
-      <div class="search-box animate-scale-in delay-3" id="heroSearch">
-        <i class="fas fa-map-marker-alt search-box__icon"></i>
-        <input type="text" class="search-box__input" id="cityInput" autocomplete="new-password" name="search_home_query"
-          placeholder="Città, CAP o nome scuola..." readonly onfocus="this.removeAttribute('readonly');"
-          aria-label="Cerca scuola per città o CAP" />
-        <button class="search-box__btn" onclick="doSearch()" id="searchBtn">
-          <i class="fas fa-search"></i> Cerca
-        </button>
+      <div class="ac-search-wrapper" style="max-width:640px;margin:0 auto 1.5rem;position:relative;">
+        <div class="search-box animate-scale-in delay-3" id="heroSearch" style="margin:0;">
+          <i class="fas fa-map-marker-alt search-box__icon"></i>
+          <input type="text" class="search-box__input" id="cityInput" autocomplete="off" name="search_home_query"
+            placeholder="Città, CAP o nome scuola..." readonly onfocus="this.removeAttribute('readonly');"
+            aria-label="Cerca scuola per città o CAP" />
+          <button class="search-box__btn" onclick="doSearch()" id="searchBtn">
+            <i class="fas fa-search"></i> Cerca
+          </button>
+        </div>
       </div>
 
       <div class="hero__tags animate-fade-in delay-4">
@@ -1190,7 +1225,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Scientifico Alessandro Volta</div>
+          <div class="school-card__name" title="Liceo Scientifico Alessandro Volta">Liceo Scientifico Alessandro Volta</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Benedetto Croce 8, Milano</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ FGA 87,39</span>
@@ -1210,7 +1245,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Scientifico Augusto Righi</div>
+          <div class="school-card__name" title="Liceo Scientifico Augusto Righi">Liceo Scientifico Augusto Righi</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Bordonaro 7, Roma</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ FGA 88,35</span>
@@ -1230,7 +1265,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Scientifico Galileo Galilei</div>
+          <div class="school-card__name" title="Liceo Scientifico Galileo Galilei">Liceo Scientifico Galileo Galilei</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Benedetto Varchi 14, Firenze</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ Top Scientifico Firenze</span>
@@ -1250,7 +1285,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Scientifico Altiero Spinelli</div>
+          <div class="school-card__name" title="Liceo Scientifico Altiero Spinelli">Liceo Scientifico Altiero Spinelli</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via XXV Aprile 141, Nichelino (TO)</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ FGA 86,92</span>
@@ -1270,7 +1305,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Scientifico Nicolò Copernico</div>
+          <div class="school-card__name" title="Liceo Scientifico Nicolò Copernico">Liceo Scientifico Nicolò Copernico</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Garavaglia 11, Bologna</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ Top Scientifico Bologna</span>
@@ -1290,7 +1325,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Scientifico Nervi-Ferrari</div>
+          <div class="school-card__name" title="Liceo Scientifico Nervi-Ferrari">Liceo Scientifico Nervi-Ferrari</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Lungo Mallero Diaz 11, Morbegno (SO)</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ FGA 90,55 — Miglior d'Italia</span>
@@ -1314,7 +1349,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Classico Torquato Tasso</div>
+          <div class="school-card__name" title="Liceo Classico Torquato Tasso">Liceo Classico Torquato Tasso</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Sicilia 168, Roma</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ Eccellenza storica</span>
@@ -1334,7 +1369,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Classico E.Q. Visconti</div>
+          <div class="school-card__name" title="Liceo Classico E.Q. Visconti">Liceo Classico E.Q. Visconti</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Recchi 8, Roma</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ FGA 80,65 — #1 Roma</span>
@@ -1354,7 +1389,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Classico Luigi Galvani</div>
+          <div class="school-card__name" title="Liceo Classico Luigi Galvani">Liceo Classico Luigi Galvani</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Castiglione 38, Bologna</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ Top Classico Bologna</span>
@@ -1374,7 +1409,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Classico Vincenzo Gioberti</div>
+          <div class="school-card__name" title="Liceo Classico Vincenzo Gioberti">Liceo Classico Vincenzo Gioberti</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Revel 4, Torino</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ Top Classico Torino</span>
@@ -1394,7 +1429,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Classico Giuseppe Parini</div>
+          <div class="school-card__name" title="Liceo Classico Giuseppe Parini">Liceo Classico Giuseppe Parini</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Goito 4, Milano</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ Eccellenza Umanistica</span>
@@ -1414,7 +1449,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">Liceo Classico Niccolò Machiavelli</div>
+          <div class="school-card__name" title="Liceo Classico Niccolò Machiavelli">Liceo Classico Niccolò Machiavelli</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Santo Spirito 39, Firenze</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ Top Classico Firenze</span>
@@ -1439,7 +1474,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">ITIS Giacomo Feltrinelli</div>
+          <div class="school-card__name" title="ITIS Giacomo Feltrinelli">ITIS Giacomo Feltrinelli</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Piazza Tito Lucrezio Caro 8, Milano</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ Top Lab Informatica</span>
@@ -1459,7 +1494,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">ITIS Leonardo da Vinci</div>
+          <div class="school-card__name" title="ITIS Leonardo da Vinci">ITIS Leonardo da Vinci</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Toscana 10, Parma</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ Alternanza Top</span>
@@ -1479,7 +1514,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">ITIS Alessandro Volta</div>
+          <div class="school-card__name" title="ITIS Alessandro Volta">ITIS Alessandro Volta</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Monte Grappa 1, Trieste</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ Eccellenza Nordest</span>
@@ -1499,7 +1534,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">ITIS Caterina Caniana</div>
+          <div class="school-card__name" title="ITIS Caterina Caniana">ITIS Caterina Caniana</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Polaresco 15, Bergamo</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ Design & Moda ITIS</span>
@@ -1519,7 +1554,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">ITIS Bodoni-Paravia</div>
+          <div class="school-card__name" title="ITIS Bodoni-Paravia">ITIS Bodoni-Paravia</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Ponchielli 56, Torino</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ Top ITS Torino</span>
@@ -1539,7 +1574,7 @@
           </div>
         </div>
         <div class="school-card__body">
-          <div class="school-card__name">ITIS Guglielmo Marconi</div>
+          <div class="school-card__name" title="ITIS Guglielmo Marconi">ITIS Guglielmo Marconi</div>
           <div class="school-card__address"><i class="fas fa-map-marker-alt"></i> Via Milano 51, Pontedera (PI)</div>
           <div class="school-card__cats">
             <span class="badge badge-gold">⭐ Automotive & Tech</span>
@@ -1933,6 +1968,7 @@
   </div>
 
   <script src="js/main.js"></script>
+  <script src="js/autocomplete.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="js/emailjs-config.js"></script>
   <script src="js/auth.js"></script>

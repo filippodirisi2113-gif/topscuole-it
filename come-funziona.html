@@ -834,31 +834,65 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <a href="index.html" class="navbar__logo" style="text-decoration:none;">
             <img src="assets/logo.png" alt="TopScuole.it logo" />
             <span class="navbar__brand">Top<span>Scuole</span>.it</span>
         </a>
-        <div class="navbar__links">
-            <a href="index.html">Home</a>
-            <a href="schools.html">Cerca Scuola</a>
-            <a href="come-funziona.html" class="active">Come Funziona</a>
-        </div>
-        <div style="display:flex;align-items:center;gap:1rem;">
-            <button id="navLoginBtn" onclick="openAuthModal('login')" class="navbar__cta">Accedi</button>
-            <div id="navUserWidget" class="nav-user" onclick="toggleUserDropdown()">
-                <div id="navUserAvatar" class="nav-avatar">U</div>
-                <span id="navUserName" class="nav-username">Utente</span>
-                <i class="fas fa-chevron-down" style="color:rgba(255,255,255,.5);font-size:.7rem;"></i>
-                <div id="userDropdown" class="nav-dropdown">
-                    <a href="#"><i class="fas fa-user"></i> Il mio profilo</a>
-                    <a href="schools.html"><i class="fas fa-search"></i> Cerca scuole</a>
-                    <button class="logout-btn" onclick="handleSignOut()"><i class="fas fa-sign-out-alt"></i>
-                        Esci</button>
+        <ul class="navbar__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="schools.html">Cerca Scuola</a></li>
+            <li><a href="come-funziona.html" class="active">Come Funziona</a></li>
+            <li>
+                <button id="navLoginBtn" onclick="openAuthModal('login')" class="navbar__cta"
+                    style="display:flex;align-items:center;gap:.4rem;"><i class="fas fa-user"></i> Accedi</button>
+            </li>
+            <li>
+                <div id="navUserWidget" class="nav-user" onclick="toggleUserDropdown()">
+                    <div id="navUserAvatar" class="nav-avatar">U</div>
+                    <span id="navUserName" class="nav-username">Utente</span>
+                    <i class="fas fa-chevron-down" style="color:rgba(255,255,255,.5);font-size:.7rem;"></i>
+                    <div id="userDropdown" class="nav-dropdown">
+                        <a href="#"><i class="fas fa-user"></i> Il mio profilo</a>
+                        <a href="schools.html"><i class="fas fa-search"></i> Cerca scuole</a>
+                        <button class="logout-btn" onclick="handleSignOut()"><i class="fas fa-sign-out-alt"></i> Esci</button>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </li>
+        </ul>
+        <!-- Hamburger -->
+        <button class="navbar__hamburger" id="navHamburger" aria-label="Apri menu" onclick="toggleMobileMenu()">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="navbar__mobile-menu" id="mobileMenu">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="schools.html"><i class="fas fa-search"></i> Cerca Scuole</a>
+        <a href="come-funziona.html"><i class="fas fa-info-circle"></i> Come Funziona</a>
+        <button class="mobile-cta" onclick="openAuthModal('login'); closeMobileMenu()">
+            <i class="fas fa-user"></i> Accedi
+        </button>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            var menu = document.getElementById('mobileMenu');
+            var btn = document.getElementById('navHamburger');
+            menu.classList.toggle('open');
+            btn.classList.toggle('open');
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.getElementById('navHamburger').classList.remove('open');
+        }
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.navbar') && !e.target.closest('.navbar__mobile-menu')) {
+                closeMobileMenu();
+            }
+        });
+    </script>
 
     <!-- HERO -->
     <section class="hero-cf">
@@ -992,57 +1026,57 @@
             <p class="section-sub">Ecco le risposte alle domande più comuni degli utenti.</p>
         </div>
         <div class="faq-list">
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
                     È gratuito usare TopScuole.it?
                     <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="faq-answer">Sì, completamente gratuito. Puoi cercare scuole, leggere recensioni e
+                <div class="faq-answer" role="region">Sì, completamente gratuito. Puoi cercare scuole, leggere recensioni e
                     confrontare istituti senza pagare nulla. Anche la registrazione per scrivere recensioni è gratuita.
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
                     Le recensioni sono verificate?
                     <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="faq-answer">Ogni recensore deve registrarsi con un'email valida, verificata tramite codice
+                <div class="faq-answer" role="region">Ogni recensore deve registrarsi con un'email valida, verificata tramite codice
                     OTP. Questo riduce i profili falsi. Le recensioni sono moderate e possono essere segnalate dalla
                     community se ritenute false o offensive.</div>
             </div>
             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
                     Come vengono calcolate le valutazioni?
                     <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="faq-answer">Il punteggio finale è la media aritmetica delle valutazioni su 5 criteri
+                <div class="faq-answer" role="region">Il punteggio finale è la media aritmetica delle valutazioni su 5 criteri
                     (Didattica, Strutture, Ambiente, Organizzazione, Servizi), a sua volta mediata su tutte le
                     recensioni ricevute. Il punteggio va da 1 a 5.</div>
             </div>
             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
                     Posso modificare o eliminare la mia recensione?
                     <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="faq-answer">Sì. Accedi al tuo profilo, trova la recensione e puoi modificarla o eliminarla
+                <div class="faq-answer" role="region">Sì. Accedi al tuo profilo, trova la recensione e puoi modificarla o eliminarla
                     in qualsiasi momento. Le modifiche sono tracciate con la data dell'ultima modifica.</div>
             </div>
             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
                     Da dove provengono i dati delle scuole?
                     <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="faq-answer">I dati anagrafici delle oltre 4.000 scuole superiori italiane provengono dal
+                <div class="faq-answer" role="region">I dati anagrafici delle oltre 4.000 scuole superiori italiane provengono dal
                     dataset open source del <a href="https://dati.istruzione.it" target="_blank" rel="noopener"
                         style="color:#0D1B2A;font-weight:600;">Ministero dell'Istruzione (MIUR)</a>, aggiornati all'anno
                     scolastico 2025/26.</div>
             </div>
             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
+                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
                     Posso segnalare una recensione falsa o inappropriata?
                     <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="faq-answer">Sì. Ogni recensione ha un pulsante "Segnala". Le segnalazioni vengono esaminate
+                <div class="faq-answer" role="region">Sì. Ogni recensione ha un pulsante "Segnala". Le segnalazioni vengono esaminate
                     dal nostro team e le recensioni che violano le linee guida vengono rimosse entro 48 ore.</div>
             </div>
         </div>
@@ -1069,8 +1103,11 @@
             <a href="index.html">Home</a>
             <a href="schools.html">Cerca scuola</a>
             <a href="come-funziona.html">Come funziona</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Termini di Servizio</a>
         </p>
-        <p>© 2025 TopScuole.it — Dati MIUR Open Data 2025/26 — Tutti i diritti riservati</p>
+        <p>© 2026 TopScuole.it — Dati MIUR Open Data 2025/26 — Tutti i diritti riservati</p>
+        <p style="font-size:.75rem;margin-top:.35rem;opacity:.6;">P.IVA in fase di registrazione &nbsp;|&nbsp; Le recensioni rappresentano opinioni personali degli utenti</p>
     </footer>
 
     <!-- AUTH MODAL -->
@@ -1089,6 +1126,10 @@
                 <div class="auth-body">
                     <div id="authError"></div>
                     <div id="loginPane">
+                        <button class="auth-btn auth-btn-google" id="btnLoginGoogle" onclick="signInWithGoogle()">
+                            <img src="https://www.google.com/favicon.ico" width="16" alt="Google" /> Accedi con Google
+                        </button>
+                        <div class="auth-divider">oppure con email</div>
                         <div class="auth-field"><label>Email</label><input type="email" id="authEmail"
                                 placeholder="nome@esempio.it" autocomplete="email" /></div>
                         <div class="auth-field"><label>Password</label><input type="password" id="authPassword"
@@ -1100,7 +1141,10 @@
                                 gratis</a></div>
                     </div>
                     <div id="registerPane" style="display:none">
-                        <div class="auth-divider" style="margin-top:0">Registrati con email</div>
+                        <button class="auth-btn auth-btn-google" id="btnRegGoogle" onclick="signInWithGoogle()">
+                            <img src="https://www.google.com/favicon.ico" width="16" alt="Google" /> Registrati con Google
+                        </button>
+                        <div class="auth-divider">oppure con email</div>
                         <div class="auth-field"><label>Nome e Cognome</label><input type="text" id="regName"
                                 placeholder="Mario Rossi" autocomplete="name" /></div>
                         <div class="auth-field"><label>Email</label><input type="email" id="regEmail"
@@ -1149,6 +1193,8 @@
         function toggleFaq(btn) {
             var item = btn.closest('.faq-item');
             item.classList.toggle('open');
+            var isOpen = item.classList.contains('open');
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>

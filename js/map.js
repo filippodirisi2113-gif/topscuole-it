@@ -125,11 +125,15 @@
   function showSuggestionBanner(query, suggestions) {
     var banner = document.getElementById('suggestionBanner');
     if (!banner) return;
+    
+    var resetBtnHtml = '<button onclick="window.resetFilters()" style="margin-top:1rem;background:#1A3A5C;color:#fff;border:none;border-radius:999px;padding:.5rem 1.25rem;font-weight:700;font-size:.85rem;cursor:pointer;font-family:Inter,sans-serif;box-shadow:0 4px 12px rgba(26,58,92,.15);transition:background .2s;"><i class="fas fa-undo" style="margin-right:.35rem;"></i> Azzera filtri</button>';
+
     if (!suggestions.length) {
       banner.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--gray-400);">'
         + '<i class="fas fa-search" style="font-size:2rem;margin-bottom:.75rem;display:block;"></i>'
         + '<strong>Nessuna scuola trovata per "' + escHtml(query) + '"</strong><br>'
         + '<span style="font-size:.85rem;margin-top:.5rem;display:block;">Prova con la città, la regione o il tipo di scuola.</span>'
+        + resetBtnHtml
         + '</div>';
       return;
     }
@@ -144,6 +148,9 @@
           + 'padding:.4rem 1rem;font-weight:700;font-size:.82rem;cursor:pointer;margin:.2rem;font-family:Inter,sans-serif;">'
           + escHtml(s.nome) + ' — ' + escHtml(s.comune) + '</button>';
       }).join('')
+      + '<div style="margin-top:1rem;border-top:1px solid #eee;padding-top:.75rem;display:flex;justify-content:center;">'
+      + resetBtnHtml
+      + '</div>'
       + '</div>';
   }
 
@@ -191,6 +198,46 @@
     var provincia = document.getElementById('provinceFilter') ? document.getElementById('provinceFilter').value : '';
     var comune = document.getElementById('cityFilter') ? document.getElementById('cityFilter').value : '';
     var minRat = parseFloat(document.getElementById('ratingFilter') ? document.getElementById('ratingFilter').value : '0') || 0;
+
+    // --- Cascading Dropdowns ---
+    var selP = document.getElementById('provinceFilter');
+    var selC = document.getElementById('cityFilter');
+    if (selP && selC) {
+      var validProvinces = {};
+      var validCities = {};
+      SCHOOLS_DATA.forEach(function(s) {
+        var matchR_cascade = !regione || (s.regione || '').toLowerCase() === regione.toLowerCase();
+        var matchP_cascade = !provincia || (s.provincia || '').toLowerCase() === provincia.toLowerCase();
+        if (matchR_cascade && s.provincia) validProvinces[s.provincia] = true;
+        if (matchR_cascade && matchP_cascade && s.comune) validCities[s.comune] = true;
+      });
+
+      if (provincia && !validProvinces[provincia]) {
+         selP.value = ''; provincia = '';
+         var csP = document.getElementById('csel-province');
+         if (csP) csP.querySelector('.csel__label').textContent = 'Tutte le province';
+      }
+      while (selP.options.length > 1) selP.remove(1);
+      Object.keys(validProvinces).sort().forEach(function(p) {
+        var opt = document.createElement('option');
+        opt.value = p; opt.textContent = p;
+        selP.appendChild(opt);
+      });
+      if (window.popMenu) window.popMenu('provinceFilter', 'csel-province-menu', 'csel-province', 'fa-map-pin');
+
+      if (comune && !validCities[comune]) {
+         selC.value = ''; comune = '';
+         var csC = document.getElementById('csel-city');
+         if (csC) csC.querySelector('.csel__label').textContent = 'Tutti i comuni';
+      }
+      while (selC.options.length > 1) selC.remove(1);
+      Object.keys(validCities).sort().forEach(function(c) {
+        var opt = document.createElement('option');
+        opt.value = c; opt.textContent = c;
+        selC.appendChild(opt);
+      });
+      if (window.popMenu) window.popMenu('cityFilter', 'csel-city-menu', 'csel-city', 'fa-city');
+    }
 
     filtered = SCHOOLS_DATA.filter(function (s) {
       var matchQ = !qLow || [s.nome, s.comune, s.tipo, s.provincia, s.id, s.cap, s.regione || '', s.indirizzo]
@@ -310,6 +357,40 @@
     }
   }
 
+  function resetFilters() {
+    var searchInput = document.getElementById('searchInput');
+    if (searchInput) searchInput.value = '';
+
+    var selects = {
+      'typeFilter': { val: '', label: 'Tutti i tipi', csId: 'csel-type' },
+      'regionFilter': { val: '', label: 'Tutte le regioni', csId: 'csel-region' },
+      'provinceFilter': { val: '', label: 'Tutte le province', csId: 'csel-province' },
+      'cityFilter': { val: '', label: 'Tutti i comuni', csId: 'csel-city' },
+      'ratingFilter': { val: '0', label: 'Tutti i voti', csId: 'csel-rating' }
+    };
+
+    Object.keys(selects).forEach(function (id) {
+      var sel = document.getElementById(id);
+      if (sel) sel.value = selects[id].val;
+      
+      var cs = document.getElementById(selects[id].csId);
+      if (cs) {
+        var labelEl = cs.querySelector('.csel__label');
+        if (labelEl) labelEl.textContent = selects[id].label;
+        
+        cs.querySelectorAll('.csel__item').forEach(function (item, idx) {
+          if (idx === 0) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+    });
+
+    filterSchools();
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
@@ -319,5 +400,6 @@
   window.filterSchools = filterSchools;
   window.applySearch = applySearch;
   window.loadMoreSchools = loadMoreSchools;
+  window.resetFilters = resetFilters;
 
 })();

@@ -644,7 +644,7 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <a href="index.html" class="navbar__logo" style="text-decoration:none;">
             <img src="assets/logo.png" alt="TopScuole.it logo" />
             <span class="navbar__brand">Top<span>Scuole</span>.it</span>
@@ -653,6 +653,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="schools.html" style="color:var(--gold);">Cerca Scuole</a></li>
             <li><a href="#">Classifiche</a></li>
+            <li><a href="come-funziona.html">Come Funziona</a></li>
             <li>
                 <button id="navLoginBtn" class="navbar__cta" onclick="openAuthModal('login')"
                     style="display:flex;align-items:center;gap:.4rem;">
@@ -668,13 +669,46 @@
                         <a href="#"><i class="fas fa-user-circle"></i> Il mio profilo</a>
                         <a href="#"><i class="fas fa-star"></i> Le mie recensioni</a>
                         <hr style="border:none;border-top:1px solid #e9ecef;margin:.3rem 0" />
-                        <button class="logout-btn" onclick="handleSignOut()"><i class="fas fa-sign-out-alt"></i>
-                            Esci</button>
+                        <button class="logout-btn" onclick="handleSignOut()"><i class="fas fa-sign-out-alt"></i> Esci</button>
                     </div>
                 </div>
             </li>
         </ul>
+        <!-- Hamburger -->
+        <button class="navbar__hamburger" id="navHamburger" aria-label="Apri menu" onclick="toggleMobileMenu()">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="navbar__mobile-menu" id="mobileMenu">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="schools.html"><i class="fas fa-search"></i> Cerca Scuole</a>
+        <a href="#"><i class="fas fa-trophy"></i> Classifiche</a>
+        <a href="come-funziona.html"><i class="fas fa-info-circle"></i> Come Funziona</a>
+        <button class="mobile-cta" onclick="openAuthModal('login'); closeMobileMenu()">
+            <i class="fas fa-user"></i> Accedi
+        </button>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            var menu = document.getElementById('mobileMenu');
+            var btn = document.getElementById('navHamburger');
+            menu.classList.toggle('open');
+            btn.classList.toggle('open');
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.getElementById('navHamburger').classList.remove('open');
+        }
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.navbar') && !e.target.closest('.navbar__mobile-menu')) {
+                closeMobileMenu();
+            }
+        });
+    </script>
+
 
     <!-- HERO HEADER -->
     <div class="schools-hero">
@@ -687,12 +721,17 @@
 
     <!-- SEARCH BAR -->
     <div class="search-bar">
-        <div class="search-bar__input-wrap" style="min-width:260px;">
+        <div class="search-bar__input-wrap" style="min-width:260px; flex:1; position:relative;">
             <i class="fas fa-search" style="color:var(--gray-400);"></i>
-            <input type="text" id="searchInput" autocomplete="new-password" name="search_school_query"
+            <input type="text" id="searchInput" autocomplete="off" name="search_school_query"
                 placeholder="Cerca scuola, città, CAP, codice MIUR..." readonly
                 onfocus="this.removeAttribute('readonly');" />
         </div>
+        
+        <button id="mobileFilterBtn" onclick="document.querySelector('.search-bar').classList.toggle('filters-open')" class="mobile-filter-btn">
+            <i class="fas fa-filter"></i> Filtra
+        </button>
+
 
         <!-- Hidden selects (usati dal JS esistente) -->
         <select id="typeFilter" style="display:none" onchange="filterSchools()">
@@ -760,7 +799,7 @@
         <!-- Custom dropdown: Provincia -->
         <div class="csel" id="csel-province">
             <button class="csel__btn" type="button" onclick="csToggle('csel-province')">
-                <span class="csel__label">Province</span>
+                <span class="csel__label">Tutte le province</span>
                 <i class="fas fa-chevron-down csel__arrow"></i>
             </button>
             <div class="csel__menu" id="csel-province-menu">
@@ -772,7 +811,7 @@
         <!-- Custom dropdown: Comune -->
         <div class="csel" id="csel-city">
             <button class="csel__btn" type="button" onclick="csToggle('csel-city')">
-                <span class="csel__label">Città</span>
+                <span class="csel__label">Tutti i comuni</span>
                 <i class="fas fa-chevron-down csel__arrow"></i>
             </button>
             <div class="csel__menu" id="csel-city-menu">
@@ -912,6 +951,50 @@
       .csel__menu::-webkit-scrollbar { width: 4px; }
       .csel__menu::-webkit-scrollbar-track { background: transparent; }
       .csel__menu::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
+
+      .mobile-filter-btn {
+          display: none;
+      }
+
+      @media (max-width: 768px) {
+          .mobile-filter-btn {
+              display: inline-flex;
+              align-items: center;
+              gap: .5rem;
+              padding: .52rem 1.1rem;
+              background: var(--white);
+              border: 1.5px solid var(--gray-200);
+              border-radius: 999px;
+              font-family: 'Inter', sans-serif;
+              font-size: .85rem;
+              font-weight: 600;
+              color: var(--navy);
+              cursor: pointer;
+          }
+          .csel {
+              display: none;
+              width: 100%;
+          }
+          .search-bar.filters-open .csel {
+              display: block;
+          }
+          .search-bar.filters-open .csel__btn {
+              width: 100%;
+              justify-content: space-between;
+          }
+          .search-bar {
+              padding: 1rem;
+              gap: .5rem;
+          }
+          .search-bar__input-wrap {
+              min-width: 100% !important;
+          }
+          .mobile-filter-btn {
+              width: 100%;
+              justify-content: center;
+              margin-bottom: .5rem;
+          }
+      }
     </style>
 
     <script>
@@ -958,19 +1041,36 @@
           var selC = document.getElementById('cityFilter');
           
           if (selR && selR.options.length > 1) {
-            function popMenu(selId, menuId, csId, icon) {
+            window.popMenu = function(selId, menuId, csId, icon) {
               var sel = document.getElementById(selId);
               var menu = document.getElementById(menuId);
               if (!sel || !menu) return;
+              
+              // Rimuove in modo sicuro tutti i figli dal secondo in poi
+              while (menu.children.length > 1) {
+                menu.removeChild(menu.children[1]);
+              }
+
+              // Gestisce lo stato active per il primo elemento di reset (Tutti/Tutte le...)
+              var firstItem = menu.querySelector('.csel__item');
+              if (firstItem) {
+                if (sel.value === '') {
+                  firstItem.classList.add('active');
+                } else {
+                  firstItem.classList.remove('active');
+                }
+              }
+
               for (var i = 1; i < sel.options.length; i++) {
                 var v = sel.options[i].value;
                 var d = document.createElement('div');
                 d.className = 'csel__item';
+                if (sel.value === v) d.classList.add('active');
                 d.innerHTML = '<i class="fas ' + icon + ' csel__check"></i>' + v;
                 d.setAttribute('onclick', 'csSelect(\'' + csId + '\',\'' + selId + '\',\'' + v.replace(/'/g,"\\'") + '\',\'' + v.replace(/'/g,"\\'") + '\',this)');
                 menu.appendChild(d);
               }
-            }
+            };
             popMenu('regionFilter', 'csel-region-menu', 'csel-region', 'fa-map-marker-alt');
             popMenu('provinceFilter', 'csel-province-menu', 'csel-province', 'fa-map-pin');
             popMenu('cityFilter', 'csel-city-menu', 'csel-city', 'fa-city');
@@ -1051,12 +1151,26 @@
         <button id="loadMoreBtn" style="display:none;" onclick="loadMoreSchools()"></button>
     </div>
 
+    <!-- FOOTER -->
+    <footer>
+        <p style="margin-bottom:.5rem;">
+            <a href="index.html">Home</a>
+            <a href="schools.html">Cerca scuola</a>
+            <a href="come-funziona.html">Come funziona</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Termini di Servizio</a>
+        </p>
+        <p>© 2026 TopScuole.it — Dati MIUR Open Data 2025/26 — Tutti i diritti riservati</p>
+        <p style="font-size:.75rem;margin-top:.35rem;opacity:.6;">P.IVA in fase di registrazione &nbsp;|&nbsp; Le recensioni rappresentano opinioni personali degli utenti</p>
+    </footer>
+
     <!-- Dataset MIUR 2025/26 — 4.026 scuole superiori italiane -->
     <script src="data/schools-data.js"></script>
     <script src="data/seed-reviews.js"></script>
     <script src="js/main.js"></script>
     <script src="js/reviews-db.js"></script>
     <script src="js/map.js"></script>
+    <script src="js/autocomplete.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="js/emailjs-config.js"></script>
     <script src="js/auth.js"></script>
@@ -1093,7 +1207,10 @@
                                 gratis</a></div>
                     </div>
                     <div id="registerPane" style="display:none">
-                        <div class="auth-divider" style="margin-top:0">Registrati con email</div>
+                        <button class="auth-btn auth-btn-google" id="btnRegGoogle" onclick="signInWithGoogle()">
+                            <img src="https://www.google.com/favicon.ico" width="16" alt="G" /> Registrati con Google
+                        </button>
+                        <div class="auth-divider">oppure con email</div>
                         <div class="auth-field"><label>Nome e Cognome</label><input type="text" id="regName"
                                 placeholder="Mario Rossi" autocomplete="name" /></div>
                         <div class="auth-field"><label>Email</label><input type="email" id="regEmail"
